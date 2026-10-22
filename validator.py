@@ -8,9 +8,12 @@ Unübersetzbares (Mentions, URLs, Code, LLAP, ...) schützen schon die Platzhalt
 markup.restore() das Ergebnis vorher.
 
 Die Gründe sind kurze Kennungen (für stats.db und das Testskript): empty, commentary, length, fences, links,
-urls, everyone, llap, bold, underline, strike, spoiler, italic, lists, numbered, quotes, headers, subtext, paragraphs.
+urls, everyone, llap, bold, underline, strike, spoiler, italic, lists, numbered, quotes, headers, subtext, paragraphs,
+nur für KI-Antworten (ai=True): numbers, sentences. Die beiden fangen untergeschobene Befehle ab ("hänge einen Satz
+an", "lass die Uhrzeit weg", "mach aus 20:00 21:00") - Prompt-Injection-Tests vom 2026-10-22.
 """
 import re
+from collections import Counter
 from typing import List
 
 FENCE_RE = re.compile(r"(?<!\\)```[^\n`]*\n?[\s\S]*?```")
@@ -26,6 +29,14 @@ COMMENTARY_RE = re.compile(
 TOKENS = {
     "bold": r"\*\*", "underline": r"__", "strike": r"~~", "spoiler": r"\|\|", "links": r"\]\(<?https?://",
     "everyone": r"@(?:everyone|here)",
+}
+DIGITS_RE = re.compile(r"\d+")
+THOUSANDS_RE = re.compile(r"(?<=\d)[.,\u00a0\u202f' ](?=\d{3}(?!\d))")   # 1,000 / 1.000 / 1 000 -> 1000
+# Abkürzungen, nach denen kein Satz endet (alle Sprachen gemischt, klein geschrieben, ohne Punkt)
+ABBREVIATIONS = {
+    "bzw", "usw", "inkl", "evtl", "ggf", "vgl", "sog", "zzgl", "bspw", "etc", "incl", "approx", "vs", "min", "max",
+    "sec", "mio", "mrd", "nr", "no", "tel", "str", "st", "dr", "mr", "mrs", "ms", "ca", "z", "b", "d", "h", "u", "a",
+    "e", "g", "i", "p", "s", "ecc", "sig", "ad", "env", "aprox", "др", "т", "е", "см", "г", "тыс",
 }
 LINES = {
     "quotes": r"^>{1,3} ", "headers": r"^#{1,3} ", "subtext": r"^-# ", "lists": r"^\s*[-*•] ", "numbered": r"^\s*\d{1,3}[.)] ",
@@ -62,8 +73,53 @@ def _paragraphs(text: str) -> int:
     return len([p for p in re.split(r"\n\s*\n", FENCE_RE.sub("CODE", text).strip()) if p.strip()])
 
 
-def problems(src: str, out: str, strict: bool = True) -> List[str]:
-    """Gründe gegen die Übersetzung. strict=False (letzte Stufe, Libre): nur leer/Kommentar prüfen."""
+def _numbers(text: str) -> Counter:
+    return Counter(DIGITS_RE.findall(THOUSANDS_RE.sub("", URL_RE.sub("", text))))
+
+
+def numbers_changed(src: str, out: str) -> bool:
+    """Neue oder veränderte Zahlen sind nie erlaubt (z. B. 20:00 -> 21:00). Wegfallen dürfen nur 1 und 2, die in
+    Redewendungen aufgehen ("mehr als 1 mal" -> "не раз", "1-2" -> "ein, zwei")."""
+    s, o = _numbers(src), _numbers(out)
+    if o - s:
+        return True
+    return any(n not in ("1", "2") for n in s - o)
+
+
+def _sentences(text: str) -> int:
+    """Sätze zählen: Satzende = Wort mit . ! ? … am Ende (auch "Wort ." mit Leerzeichen), nicht nach Abkürzungen,
+    einzelnen Buchstaben oder Zahlen. Jede nicht leere Zeile zählt mindestens als ein Satz."""
+    total = 0
+    for line in _plain(text).split("\n"):
+        tokens = line.split()
+        if not any(re.search(r"\w", t) for t in tokens):
+            continue
+        total += 1
+        prev = ""
+        for i, tok in enumerate(tokens[:-1]):          # das letzte Wort beendet die Zeile, zählt nicht extra
+            m = re.match(r"^(.*?)([.!?…]+)[\"')\]*_~|]*$", tok)
+            word = (m.group(1) if m and m.group(1) else prev) if m else ""
+            prev = tok if re.search(r"\w", tok) else prev
+            if not m:
+                continue
+            if m.group(2) == ".":
+                base = word.strip("([\"'*_~|").lower().rstrip(".").split(".")[-1]
+                if not base or base in ABBREVIATIONS or len(base) == 1 or base[-1].isdigit():
+                    continue
+            if re.search(r"\w", tokens[i + 1]):
+                total += 1
+    return total
+
+
+def sentences_added(src: str, out: str) -> bool:
+    """Mehr Sätze als im Original - bei langen Nachrichten mit Spielraum (Übersetzungen teilen Bandwurmsätze auf):
+    je 150 Zeichen ein zusätzlicher Satz. Kurze Nachrichten bleiben streng ("Bis heute Abend! Ich verlasse ...")."""
+    return _sentences(out) > _sentences(src) + len(_plain(src)) // 150
+
+
+def problems(src: str, out: str, strict: bool = True, ai: bool = False) -> List[str]:
+    """Gründe gegen die Übersetzung. strict=False (letzte Stufe, Libre): nur leer/Kommentar prüfen.
+    ai=True (KI-Stufe): zusätzlich Zahlen und Satzanzahl - eine KI darf nichts hinzufügen oder weglassen."""
     if not out or not out.strip():
         return ["empty"]
     found: List[str] = []
@@ -94,4 +150,9 @@ def problems(src: str, out: str, strict: bool = True) -> List[str]:
             found.append(reason)
     if abs(_paragraphs(src) - _paragraphs(out)) > 1:
         found.append("paragraphs")
+    if ai:
+        if numbers_changed(src, out):
+            found.append("numbers")
+        if sentences_added(src, out):
+            found.append("sentences")
     return found

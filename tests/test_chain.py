@@ -76,8 +76,9 @@ class EngineTests(unittest.TestCase):
         self.assertEqual((call.outcome, call.tokens_in, call.tokens_out), ("ok", 120, 30))
         self.assertEqual(req["model"], "m1")
         self.assertEqual(req["temperature"], 0.1)
-        self.assertIn("<text>\nHello everyone!\n</text>", req["messages"][1]["content"])
-        self.assertIn("<context>", req["messages"][1]["content"])
+        self.assertRegex(req["messages"][-1]["content"], r"<text-([0-9a-f]+)>\nHello everyone!\n</text-\1>")
+        self.assertIn("<context-", req["messages"][-1]["content"])
+        self.assertEqual(len(req["messages"]), 2 + 2 * len(tr.AI_EXAMPLES))
         self.assertIn("FORM OF ADDRESS", req["messages"][0]["content"])
 
     def test_ai_error_classes(self):

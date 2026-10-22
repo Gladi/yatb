@@ -57,6 +57,9 @@ group = "B"
 enabled = true
 base_url = "https://api.mistral.ai/v1"
 model = "mistral-medium-3-5"
+# Prompt-Caching: gleicher Schlüssel = gleicher Prompt-Anfang (System + Beispiele) -> wiederholte Tokens kosten 10 %
+# (docs.mistral.ai, Prompt caching, 22.10.2026). Kein Geheimnis, nur eine Bezeichnung; bei neuem Prompt hochzählen.
+extra = { prompt_cache_key = "yatb-translate-v2" }
 free_available = true
 eea_free_allowed = true
 # docs.mistral.ai/inference/pricing (19.10.2026): $1.5 Input, $7.5 Output je 1M Tokens.

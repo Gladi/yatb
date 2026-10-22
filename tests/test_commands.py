@@ -86,9 +86,12 @@ class PrivacyTests(unittest.TestCase):
         key = (1, "chat", 0)
         buf.add(key, 10, "Alice: hello", 111)
         buf.add(key, 11, "Bob: hi", 222)
-        self.assertEqual(buf.recent(key, 99), ["Bob: hi"])          # Opt-out-Nutzer nie im KI-Kontext
+        buf.add(key, 12, "Alice: again", 111)
+        self.assertEqual(buf.recent(key, 99, 222), ["Bob: hi"])
+        self.assertEqual(buf.recent(key, 99, 111), [])              # Opt-out-Nutzer nie im KI-Kontext
         run(db.set_local_only(111, False))
-        self.assertEqual(buf.recent(key, 99), ["Alice: hello", "Bob: hi"])
+        self.assertEqual(buf.recent(key, 99, 111), ["Alice: hello", "Alice: again"])   # nur eigene Nachrichten
+        self.assertEqual(buf.recent(key, 12, 111), ["Alice: hello"])                   # nur frühere
 
 
 class CurrencyTests(unittest.TestCase):

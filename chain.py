@@ -36,7 +36,7 @@ log = logging.getLogger("yatb.chain")
 CHAIN_BUDGET = float(os.getenv("CHAIN_BUDGET", "30"))   # Sekunden für alle bezahlten/KI-Stufen zusammen
 AI_CONCURRENCY_PER_KEY = 4
 CACHE_MAX, CACHE_TEXT_LEN = 1000, 300
-PROMPT_OVERHEAD_TOKENS = len(tr.AI_SYSTEM) // 3 + 60
+PROMPT_OVERHEAD_TOKENS = (len(tr.AI_SYSTEM) + sum(len(u) + len(r) for u, r in tr.AI_EXAMPLES)) // 3 + 120
 TAGS = {"ai": "[AI]", "google": "[Google]", "azure": "[Azure]", "libre": "[Libre]"}
 MODELS = {"google": "translate-v2", "azure": "translator-v3", "libre": "libretranslate"}
 
@@ -259,7 +259,7 @@ async def _run_ai(session, guild_id: int, spec: Spec, segments: Sequence[str], p
             return False
         breaker(spec).success()
         text, ok = markup.restore(markup.repair_structure(prep.masked, out, prep)[0], prep)
-        reasons = ([] if ok else ["placeholders"]) + validator.problems(segments[i], text)
+        reasons = ([] if ok else ["placeholders"]) + validator.problems(segments[i], text, ai=True)
         retry = bool(reasons) and set(reasons) <= RETRY_REASONS and deadline - time.monotonic() > 5
         _record_stat(guild_id, spec, call, source, target, "validator_rejected" if reasons else "ok",
                      bool(reasons) and not retry, ",".join(reasons) + (";retry" if retry else ""))
@@ -277,7 +277,7 @@ async def _run_ai(session, guild_id: int, spec: Spec, segments: Sequence[str], p
                 _record_stat(guild_id, spec, call, source, target, call.outcome, True, "retry")
                 return False
             text, ok = markup.restore(markup.repair_structure(prep.masked, out, prep)[0], prep)
-            reasons = ([] if ok else ["placeholders"]) + validator.problems(segments[i], text)
+            reasons = ([] if ok else ["placeholders"]) + validator.problems(segments[i], text, ai=True)
             _record_stat(guild_id, spec, call, source, target, "validator_rejected" if reasons else "ok",
                          bool(reasons), "retry:" + ",".join(reasons) if reasons else "retry")
         if reasons:

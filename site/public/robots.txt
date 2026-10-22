@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://yatb.gladi.de/sitemap.xml

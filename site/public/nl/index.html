@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>YATB - Praat in verschillende talen op Discord</title>
+<meta name="description" content="YATB koppelt Discord-kanalen in verschillende talen en vertaalt elk bericht - onder de naam van de auteur.">
+<link rel="canonical" href="https://yatb.gladi.de/nl/">
+<link rel="alternate" hreflang="en" href="https://yatb.gladi.de/en/"><link rel="alternate" hreflang="de" href="https://yatb.gladi.de/de/"><link rel="alternate" hreflang="fr" href="https://yatb.gladi.de/fr/"><link rel="alternate" hreflang="es" href="https://yatb.gladi.de/es/"><link rel="alternate" hreflang="it" href="https://yatb.gladi.de/it/"><link rel="alternate" hreflang="ru" href="https://yatb.gladi.de/ru/"><link rel="alternate" hreflang="nl" href="https://yatb.gladi.de/nl/"><link rel="alternate" hreflang="x-default" href="https://yatb.gladi.de/en/">
+<meta property="og:title" content="YATB - Praat in verschillende talen op Discord">
+<meta property="og:description" content="YATB koppelt Discord-kanalen in verschillende talen en vertaalt elk bericht - onder de naam van de auteur.">
+<meta property="og:image" content="https://yatb.gladi.de/static/img/og.jpg?v=1644ae2b30">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0b1220">
+<link rel="icon" href="/static/img/favicon-32.png?v=c453f22671" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png?v=25adda10a1">
+<link rel="stylesheet" href="/static/style.css?v=4737b925e3">
+</head>
+<body>
+<header class="top">
+<div class="wrap bar">
+<a class="brand" href="/nl/"><img src="/static/img/mark-96.webp?v=5b8ef5cfa5" width="40" height="40" alt=""><span>YATB</span></a>
+<input type="checkbox" id="menu-toggle" class="menu-toggle">
+<label for="menu-toggle" class="menu-button">Menu</label>
+<nav class="nav" aria-label="Menu"><ul><li><a href="/nl/members">Voor leden</a></li><li><a href="/nl/admins">Voor beheerders</a></li><li><a href="/nl/keys">API-sleutels</a></li></ul></nav>
+<details class="langs"><summary aria-label="Taal"><span aria-hidden="true">🌐</span> NL</summary><ul><li><a href="/en/" hreflang="en" lang="en">English</a></li><li><a href="/de/" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/" hreflang="fr" lang="fr">Français</a></li><li><a href="/es/" hreflang="es" lang="es">Español</a></li><li><a href="/it/" hreflang="it" lang="it">Italiano</a></li><li><a href="/ru/" hreflang="ru" lang="ru">Русский</a></li><li><a href="/nl/" hreflang="nl" lang="nl" aria-current="true">Nederlands</a></li></ul></details>
+</div>
+</header>
+<main class="wrap">
+
+<section class="hero">
+<img class="hero-logo" src="/static/img/logo-512.webp?v=75dc41f6d1" width="256" height="256" alt="YATB">
+<div>
+<h1>Praat in verschillende talen op Discord</h1>
+<p class="lead">YATB - <em>Yet Another Translation Bot</em> - koppelt kanalen in verschillende talen. Iedereen schrijft in zijn eigen taal, YATB plaatst de vertaling in de andere kanalen, onder de naam en avatar van de auteur.</p>
+<ul class="badges"><li>7 talen</li><li>Geen berichtteksten opgeslagen</li><li>Privébot</li></ul>
+</div>
+</section>
+<figure class="example"><div class="chan"><div class="chan-name"># english</div><div class="msg"><div class="avatar" aria-hidden="true">M</div><div><div class="author">Mia</div><div class="text">Anyone up for a raid tonight? Meet at 8 pm in <span class="mention">#voice</span> 🎮</div></div></div></div><div class="arrow" aria-hidden="true">→</div><div class="chan"><div class="chan-name"># nederlands</div><div class="msg"><div class="avatar" aria-hidden="true">M</div><div><div class="author">Mia <span class=tag>[AI]</span></div><div class="text">Heeft er iemand zin in een raid vanavond? We spreken om 20:00 uur af in <span class="mention">#voice</span> 🎮</div></div></div></div><figcaption>Voorbeeld van een gekoppeld paar kanalen. Het label na de naam toont welke dienst de vertaling heeft uitgevoerd.</figcaption></figure>
+<section><h2>Wat YATB doet</h2><div class="grid"><div class="card"><h3>Natuurlijke vertalingen</h3><p>AI-vertaling die het gesprek begrijpt: straattaal, game-termen en korte antwoorden komen goed over. Als een dienst faalt, neemt de volgende het over.</p></div><div class="card"><h3>Behoudt Discord-opmaak</h3><p>Vetgedrukte tekst, lijsten, citaten, spoilers, emoji's, vermeldingen en links blijven intact. Echte code wordt onvertaald gelaten.</p></div><div class="card"><h3>Spiegelt het gesprek</h3><p>Antwoorden, bewerkingen, verwijderingen, reacties en threads worden gespiegeld naar alle gekoppelde kanalen. Aankondigingen van gevolgde kanalen worden ook vertaald.</p></div><div class="card"><h3>Privacy by design</h3><p>Er worden geen berichtteksten opgeslagen. Elk lid kan kiezen dat hun berichten alleen op onze eigen server worden vertaald.</p></div><div class="card"><h3>Jouw sleutels, jouw budget</h3><p>Serverbeheerders voegen hun eigen API-sleutels toe in een privéformulier. Sleutels worden versleuteld opgeslagen en nooit meer getoond. Limieten en budgetwaarschuwingen zijn inbegrepen.</p></div><div class="card"><h3>Altijd een vertaling</h3><p>Zonder eigen sleutels vertaalt YATB met LibreTranslate op onze eigen server - gratis, en niets verlaat de server.</p></div></div></section>
+<section><h2>Hoe het werkt</h2><ol class="steps"><li><strong>Beheerders koppelen kanalen</strong> - bijvoorbeeld <code>#english</code> en <code>#deutsch</code> - in één Bridge.</li><li><strong>Leden schrijven gewoon</strong> in hun eigen taal. Geen commando's nodig.</li><li><strong>YATB plaatst de vertaling</strong> binnen enkele seconden in de andere kanalen.</li></ol></section>
+<section class="note"><h2>Kan ik YATB aan mijn server toevoegen?</h2><p>Op dit moment niet. YATB is een privébot en draait alleen op geselecteerde servers. Als YATB al op jouw server staat, bekijk dan de handleidingen <a href="members">voor leden</a> en <a href="admins">voor beheerders</a>.</p></section>
+<section class="support"><h2>Ben je blij met YATB?</h2><p>YATB is gratis en bevat geen advertenties. Als je wilt helpen met de lopende kosten, kun je het ondersteunen op Ko-fi.</p><a class="kofi" href="https://ko-fi.com/letsgo2u" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> Steun YATB op Ko-fi</a></section>
+</main>
+<footer class="foot">
+<div class="wrap">
+<p class="foot-links"><a href="/nl/privacy">Privacy</a> · <a href="/nl/terms">Voorwaarden</a></p>
+<a class="kofi" href="https://ko-fi.com/letsgo2u" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> Steun YATB op Ko-fi</a>
+<p class="muted">YATB is een privaat, niet-commercieel project en is niet gelieerd aan Discord.</p>
+</div>
+</footer>
+</body>
+</html>

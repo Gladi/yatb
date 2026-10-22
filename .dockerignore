@@ -1,0 +1,13 @@
+   .env
+   .env.*
+   .git
+   *.db
+   data
+   __pycache__
+   *.pyc
+   testset*.json
+   ergebnis_*
+   *.log
+   stats
+   docs
+   site

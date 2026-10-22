@@ -1,0 +1,80 @@
+# YATB - example stack. Copy to docker-compose.yml; see docs/self-hosting.md.
+# Without the dashboard: remove the yatb-web service and the yatb_internal_token / yatb_discord_client_secret secrets.
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  libretranslate:
+    image: libretranslate/libretranslate:latest
+    restart: unless-stopped
+    environment:
+      LT_LOAD_ONLY: "de,en,fr,es,it,ru,nl"
+      LT_UPDATE_MODELS: "true"
+    volumes:
+      - lt_models:/home/libretranslate/.local/share/argos-translate
+      - lt_cache:/home/libretranslate/.local/cache/argos-translate
+    logging: *logging
+
+  bot:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./data/db:/app/data               # main database
+      - ./data/stats:/app/stats           # call statistics (no message texts)
+      - ./config:/app/config:ro           # providers.toml: change -> restart, no rebuild
+    secrets:
+      - yatb_master_key                   # encrypts the API keys
+      - yatb_internal_token               # internal API for the dashboard (port 8081, Docker network only)
+    depends_on:
+      - libretranslate
+    healthcheck:                          # heartbeat file, written while connected to Discord
+      test: ["CMD", "python", "-c", "import os,sys,time; sys.exit(0 if time.time() - os.path.getmtime('/tmp/yatb_heartbeat') < 120 else 1)"]
+      interval: 60s
+      timeout: 10s
+      start_period: 180s
+      retries: 3
+    logging: *logging
+
+  # Optional web dashboard. Put a reverse proxy with TLS in front of it (see site/Caddyfile.snippet).
+  # It has no access to the database or the API keys - everything goes through the bot's internal API.
+  yatb-web:
+    build: .
+    restart: unless-stopped
+    command: ["python", "-u", "-m", "dashboard.app"]
+    environment:
+      YATB_BASE_URL: https://yatb.example.com      # public URL; the dashboard lives under /app
+      YATB_CLIENT_ID: "000000000000000000"         # Discord application ID (OAuth2 tab)
+      YATB_BOT_API: http://bot:8081
+      YATB_STATIC_DIR: /app/site-public/static
+    volumes:
+      - ./data/web:/app/web-data                 # sessions only (hashed), 7 days
+      - ./site/public:/app/site-public:ro        # CSS and images
+    secrets:
+      - yatb_internal_token
+      - yatb_discord_client_secret
+    depends_on:
+      - bot
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8080/app/healthz', timeout=5).status == 200 else 1)"]
+      interval: 60s
+      timeout: 10s
+      start_period: 30s
+      retries: 3
+    logging: *logging
+
+volumes:
+  lt_models:
+  lt_cache:
+
+secrets:
+  yatb_master_key:
+    file: ./secrets/yatb_master_key
+  yatb_internal_token:
+    file: ./secrets/yatb_internal_token
+  yatb_discord_client_secret:
+    file: ./secrets/yatb_discord_client_secret

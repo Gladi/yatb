@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Für Mitglieder · YATB</title>
+<meta name="description" content="YATB verbindet Discord-Kanäle in verschiedenen Sprachen und übersetzt jede Nachricht - unter dem Namen der Verfasserin oder des Verfassers.">
+<link rel="canonical" href="https://yatb.gladi.de/de/members">
+<link rel="alternate" hreflang="en" href="https://yatb.gladi.de/en/members"><link rel="alternate" hreflang="de" href="https://yatb.gladi.de/de/members"><link rel="alternate" hreflang="fr" href="https://yatb.gladi.de/fr/members"><link rel="alternate" hreflang="es" href="https://yatb.gladi.de/es/members"><link rel="alternate" hreflang="it" href="https://yatb.gladi.de/it/members"><link rel="alternate" hreflang="ru" href="https://yatb.gladi.de/ru/members"><link rel="alternate" hreflang="nl" href="https://yatb.gladi.de/nl/members"><link rel="alternate" hreflang="x-default" href="https://yatb.gladi.de/en/members">
+<meta property="og:title" content="Für Mitglieder · YATB">
+<meta property="og:description" content="YATB verbindet Discord-Kanäle in verschiedenen Sprachen und übersetzt jede Nachricht - unter dem Namen der Verfasserin oder des Verfassers.">
+<meta property="og:image" content="https://yatb.gladi.de/static/img/og.jpg?v=1644ae2b30">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0b1220">
+<link rel="icon" href="/static/img/favicon-32.png?v=c453f22671" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png?v=25adda10a1">
+<link rel="stylesheet" href="/static/style.css?v=4737b925e3">
+</head>
+<body>
+<header class="top">
+<div class="wrap bar">
+<a class="brand" href="/de/"><img src="/static/img/mark-96.webp?v=5b8ef5cfa5" width="40" height="40" alt=""><span>YATB</span></a>
+<input type="checkbox" id="menu-toggle" class="menu-toggle">
+<label for="menu-toggle" class="menu-button">Menü</label>
+<nav class="nav" aria-label="Menü"><ul><li><a href="/de/members" aria-current="page">Für Mitglieder</a></li><li><a href="/de/admins">Für Admins</a></li><li><a href="/de/keys">API-Keys</a></li></ul></nav>
+<details class="langs"><summary aria-label="Sprache"><span aria-hidden="true">🌐</span> DE</summary><ul><li><a href="/en/members" hreflang="en" lang="en">English</a></li><li><a href="/de/members" hreflang="de" lang="de" aria-current="true">Deutsch</a></li><li><a href="/fr/members" hreflang="fr" lang="fr">Français</a></li><li><a href="/es/members" hreflang="es" lang="es">Español</a></li><li><a href="/it/members" hreflang="it" lang="it">Italiano</a></li><li><a href="/ru/members" hreflang="ru" lang="ru">Русский</a></li><li><a href="/nl/members" hreflang="nl" lang="nl">Nederlands</a></li></ul></details>
+</div>
+</header>
+<main class="wrap">
+
+<h1>Für Mitglieder</h1>
+<p class="lead">Auf deinem Server sind einige Kanäle mit YATB verbunden. Hier steht, was das für dich bedeutet.</p>
+<section><h2>So funktioniert es</h2><ul><li>Schreib in deiner Sprache in einem verbundenen Kanal. YATB postet eine Übersetzung in den anderen verbundenen Kanälen, mit deinem Namen und Avatar.</li><li>Antworten, Bearbeitungen, Löschungen und Threads werden übernommen. Reaktionen auch: Sie erscheinen in den anderen Kanälen als Reaktion von YATB.</li><li>Formatierung, Emojis, Erwähnungen und Links bleiben erhalten.</li><li>Die Übersetzung erscheint in den anderen Kanälen - dort können sie auch Leute lesen, die deinen Kanal nicht sehen.</li></ul></section>
+<section><h2>Der Tag hinter dem Namen</h2><p>Jede Übersetzung zeigt, welcher Dienst sie erstellt hat:</p><table class="tags"><tbody><tr><td><code>[AI]</code></td><td>KI-Anbieter (zum Beispiel Mistral oder Google Gemini) - meist die beste Qualität</td></tr><tr><td><code>[Google]</code></td><td>Google Translate</td></tr><tr><td><code>[Azure]</code></td><td>Azure Translator (Microsoft)</td></tr><tr><td><code>[Libre]</code></td><td>LibreTranslate - läuft auf unserem eigenen Server</td></tr><tr><td><code>[Raw]</code></td><td>Nicht übersetzt - in dem Moment war kein Dienst verfügbar</td></tr></tbody></table></section>
+<section><h2>Deine Daten</h2><ul><li>YATB <strong>speichert keine Nachrichtentexte</strong>. Es merkt sich nur 7 Tage lang, welche Nachricht zu welcher Übersetzung gehört, damit Bearbeitungen und Löschungen übernommen werden können.</li><li>Für die Übersetzung wird deine Nachricht an die Übersetzungsdienste geschickt, die die Admins deines Servers ausgewählt haben (siehe <a href="privacy">Datenschutz</a>).</li><li>KI-Anbieter bekommen außerdem bis zu 4 vorherige Nachrichten aus demselben Gespräch als Kontext, damit kurze Antworten richtig übersetzt werden.</li></ul></section>
+<section class="note"><h2>Deine Wahl: <code>/yatb-user privacy</code></h2><ul><li><strong>Standard</strong> - beste Qualität. Deine Nachrichten dürfen an die Dienste gehen, die die Admins hinterlegt haben.</li><li><strong>Nur lokal</strong> - deine Nachrichten werden nur von LibreTranslate auf unserem eigenen Server übersetzt und nie an KI-Anbieter, Google oder Azure geschickt - auch nicht als Kontext für die Übersetzungen anderer. Die Qualität ist geringer.</li></ul><p>Die Einstellung siehst nur du, und sie gilt auf allen Servern mit YATB. <code>/yatb-user help</code> zeigt eine kurze Zusammenfassung in Discord.</p></section>
+<section><h2>Fragen</h2><details><summary>Die Übersetzung ist falsch. Was kann ich tun?</summary><p>Bearbeite deine Nachricht - die Übersetzung wird mit aktualisiert. Wenn ein Begriff immer falsch übersetzt wird, sag den Admins deines Servers Bescheid.</p></details><details><summary>Kann ich die Übersetzung ganz abschalten?</summary><p>Nachrichten in verbundenen Kanälen werden immer übersetzt, damit alle dem Gespräch folgen können. Mit <em>Nur lokal</em> bleiben sie auf unserem eigenen Server. Nicht verbundene Kanäle werden nie angefasst.</p></details><details><summary>Liest YATB meine Direktnachrichten oder andere Kanäle?</summary><p>Nein. YATB verarbeitet nur Nachrichten in Kanälen, die die Admins mit einer Bridge verbunden haben.</p></details></section>
+</main>
+<footer class="foot">
+<div class="wrap">
+<p class="foot-links"><a href="/de/privacy">Datenschutz</a> · <a href="/de/terms">Bedingungen</a></p>
+<a class="kofi" href="https://ko-fi.com/letsgo2u" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> YATB auf Ko-fi unterstützen</a>
+<p class="muted">YATB ist ein privates, nicht kommerzielles Projekt und steht in keiner Verbindung zu Discord.</p>
+</div>
+</footer>
+</body>
+</html>

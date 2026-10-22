@@ -1,0 +1,5 @@
+import Caddyfile.snippet
+
+:8088 {
+	import yatb_site /srv/yatb
+}

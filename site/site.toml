@@ -1,0 +1,16 @@
+# YATB-Website - Einstellungen (wird von site/build.py gelesen; danach neu bauen: python site/build.py)
+
+base_url = "https://yatb.gladi.de"
+
+# Stand der Rechtstexte (Datenschutz, Bedingungen) - bei inhaltlichen Änderungen anpassen.
+legal_date = "2026-10-20"
+
+# Ko-fi-Seite, z. B. "gladi" für https://ko-fi.com/gladi. Leer = Spenden-Link wird nicht angezeigt.
+kofi = "letsgo2u"
+
+# Verantwortlicher für die Datenschutzerklärung (Name + E-Mail o. ä.), HTML erlaubt.
+# Leer = deutlich markierter Platzhalter auf der Datenschutzseite (vor dem Live-Gang ausfüllen!).
+controller_html = ""
+
+# Impressum (HTML, z. B. Angaben eines Impressum-Dienstes). Leer = keine Impressum-Seite, kein Link.
+imprint_html = ""

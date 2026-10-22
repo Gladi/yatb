@@ -1,0 +1,164 @@
+# YATB - Anbieter-Konfiguration (Paket 3)
+#
+# Neuer Anbieter oder neues Modell = neuer Eintrag hier, kein neuer Code (solange OpenAI-kompatibel).
+# Die Datei wird beim Start gelesen (Änderung -> Bot neu starten, kein Neubau nötig).
+#
+# Felder je Anbieter:
+#   name, kind           Anzeigename; "openai" (KI, POST {base_url}/chat/completions), "google", "azure"
+#   group                Qualitätsgruppe A/B/C -> Reihenfolge in der Kette (Paket 4)
+#   enabled              false = Anbieter wird übersprungen (z. B. Modell abgekündigt)
+#   base_url, model      Endpunkt und Modellname (nur kind = "openai")
+#   verify_url           kostenloser Endpunkt zur Key-Prüfung (Standard: {base_url}/models)
+#   extra                Zusatzparameter für den Request (z. B. Denken abschalten)
+#   free_available       false = Anbieter hat keine Gratis-Stufe (Key gilt immer als "paid")
+#   eea_free_allowed     false = Gratis-Stufe ist für Nutzer im EWR nicht zulässig (Warnung beim Hinterlegen)
+#   price_in, price_out  Preis je 1 Mio. Tokens (KI)       | price_chars  Preis je 1 Mio. Zeichen (Google, Azure)
+#   currency             Listenwährung der Preise (= Standardwährung neuer Keys). Jeder Key hat seine eigene
+#                        Abrechnungswährung (USD/EUR, im Formular wählbar); weicht sie ab, wird 1:1 umgerechnet -
+#                        bewusst grob (Fehler ~ Wechselkurs), USD->EUR eher zu teuer, das Budget greift also früher.
+#   privacy_free/_paid   Datenschutz-Hinweis beim Hinterlegen eines Keys (Englisch). Stand 20.10.2026, Quellen und
+#                        ausführliche Fassung: site/build.py (PROVIDER_LINKS) bzw. Website, Seite "Privacy"
+#   [*.limits.free]      rpm, rpd, tpm, tpd (Anfragen/Tokens pro Minute/Tag), chars_month (Zeichen pro Monat)
+#   [*.limits.paid]      wie oben, plus budget_month (Standard-Monatsbudget eines Bezahl-Keys, änderbar per /yatb keys budget)
+#
+# Tageslimits laufen bei YATB immer um 00:00 UTC zurück, Monatslimits am 1. um 00:00 UTC.
+# Fehlt ein Limit, wird es nicht geprüft (429-Antworten fängt ab Paket 4 der Circuit-Breaker ab).
+#
+# Preise/Limits: Stand 19.10.2026, Quellen in den Kommentaren. "UNBESTÄTIGT" = nicht auf einer offiziellen
+# Seite gefunden, bitte vor dem Live-Gang prüfen. Preise ändern sich - Kommentar mit Datum mitpflegen.
+
+[providers.gemini]
+name = "Google Gemini"
+kind = "openai"
+group = "A"
+enabled = true
+base_url = "https://generativelanguage.googleapis.com/v1beta/openai"
+model = "gemini-3.1-flash-lite"
+free_available = true
+eea_free_allowed = false   # Gemini-API-Bedingungen: im EWR/UK/CH nur bezahlte Dienste
+# ai.google.dev/gemini-api/docs/pricing (19.10.2026): $0.25 Input, $1.50 Output (inkl. Thinking) je 1M Tokens.
+price_in = 0.25
+price_out = 1.50
+currency = "USD"
+privacy_free = "Gemini free tier (no billing): not permitted when the bot serves users in the EEA, UK or Switzerland (Gemini API terms) - YATB only uses Gemini keys with billing enabled."
+privacy_paid = "Gemini paid tier: Google does not use the content to improve its products; prompts are logged for a limited time to detect abuse. Processed by Google worldwide."
+
+[providers.gemini.limits.free]
+# RPM/RPD je Projekt nur in AI Studio sichtbar, nicht auf der Doku-Seite -> UNBESTÄTIGT, daher leer
+
+[providers.gemini.limits.paid]
+budget_month = 5.0
+
+
+[providers.mistral]
+name = "Mistral"
+kind = "openai"
+group = "B"
+enabled = true
+base_url = "https://api.mistral.ai/v1"
+model = "mistral-medium-3-5"
+free_available = true
+eea_free_allowed = true
+# docs.mistral.ai/inference/pricing (19.10.2026): $1.5 Input, $7.5 Output je 1M Tokens.
+price_in = 1.5
+price_out = 7.5
+currency = "USD"
+privacy_free = "Mistral free (Experiment) plan: content may be used for training unless you opt out in the Mistral console."
+privacy_paid = "Mistral: no training on your content unless a product setting allows it - switch off the use of API data for improvement in the Mistral console under Privacy. A DPA is available; zero data retention can be requested."
+
+[providers.mistral.limits.free]
+# Limits des Experiment-Plans im Mistral-Konto unter "Limits" - UNBESTÄTIGT, daher leer
+
+[providers.mistral.limits.paid]
+budget_month = 8.5   # entspricht dem inkludierten API-Guthaben des Betreibers
+
+
+[providers.groq]
+name = "Groq"
+kind = "openai"
+group = "B"
+enabled = true
+base_url = "https://api.groq.com/openai/v1"
+model = "qwen/qwen3.8-27b"
+extra = { reasoning_effort = "none" }
+free_available = true
+eea_free_allowed = true
+# console.groq.com/docs/models (19.10.2026): $0.80 Input, $4.00 Output je 1M Tokens.
+# ACHTUNG: dort als "Preview Model" geführt ("should not be used in production").
+price_in = 0.80
+price_out = 4.00
+currency = "USD"
+privacy_free = "Groq: by default inference data is not kept; logs for troubleshooting or abuse are kept up to 30 days unless zero data retention is enabled under Data Controls. Data is stored in the USA."
+privacy_paid = "Groq: by default inference data is not kept; logs for troubleshooting or abuse are kept up to 30 days unless zero data retention is enabled under Data Controls. Data is stored in the USA."
+
+[providers.groq.limits.free]
+# console.groq.com/docs/rate-limits (19.10.2026): 30 RPM, 1K RPD, 8K TPM, 200K TPD.
+# Die Seite nennt die Tabelle "Developer plan"; 8K TPM passt zum Benchmark mit Free-Key -> als Free übernommen, UNBESTÄTIGT.
+rpm = 30
+rpd = 1000
+tpm = 8000
+tpd = 200000
+
+[providers.groq.limits.paid]
+budget_month = 5.0
+
+
+[providers.novita]
+name = "Novita"
+kind = "openai"
+group = "B"
+enabled = true
+base_url = "https://api.novita.ai/openai"
+model = "google/gemma-4-26b-a4b-it"
+verify_url = "https://api.novita.ai/v3/user"   # /models ist öffentlich und prüft den Key nicht
+free_available = false
+eea_free_allowed = true
+# novita.ai/pricing (19.10.2026): $0.13 Input, $0.40 Output je 1M Tokens
+price_in = 0.13
+price_out = 0.40
+currency = "USD"
+privacy_paid = "Novita: zero data retention and no training on your content by default (terms); usage metadata kept up to 2 years; processing may take place in the USA (SCC). A DPA is only offered to enterprise customers."
+
+[providers.novita.limits.paid]
+budget_month = 5.0
+
+
+[providers.google_translate]
+name = "Google Translate"
+kind = "google"
+group = "C"
+enabled = true
+free_available = true
+eea_free_allowed = true
+# cloud.google.com/translate/pricing: Seite nicht vollständig lesbar - UNBESTÄTIGT (bisheriger Stand: 500.000 Zeichen/Monat frei, danach $20 je 1M)
+price_chars = 20.0
+currency = "USD"
+privacy_free = "Google Cloud Translation: no training on your content; processed by Google worldwide (Cloud Data Processing Addendum)."
+privacy_paid = "Google Cloud Translation: no training on your content; processed by Google worldwide (Cloud Data Processing Addendum)."
+
+[providers.google_translate.limits.free]
+chars_month = 500000
+
+[providers.google_translate.limits.paid]
+budget_month = 5.0
+
+
+[providers.azure]
+name = "Azure Translator"
+kind = "azure"
+group = "C"
+enabled = true
+free_available = true
+eea_free_allowed = true
+# azure.microsoft.com/pricing/details/cognitive-services/translator (19.10.2026): F0 = 2 Mio. Zeichen/Monat frei.
+# S1-Preis auf der Seite nicht angezeigt - UNBESTÄTIGT (bisheriger Stand: $10 je 1M Zeichen)
+price_chars = 10.0
+currency = "USD"
+privacy_free = "Azure Translator: text is not stored (no trace). YATB uses the global endpoint, so requests may be processed in any Microsoft data center (usually the nearest)."
+privacy_paid = "Azure Translator: text is not stored (no trace). YATB uses the global endpoint, so requests may be processed in any Microsoft data center (usually the nearest)."
+
+[providers.azure.limits.free]
+chars_month = 2000000
+
+[providers.azure.limits.paid]
+budget_month = 5.0

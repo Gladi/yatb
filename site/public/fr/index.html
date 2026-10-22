@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>YATB - Communique au-delà des langues sur Discord</title>
+<meta name="description" content="YATB relie des salons Discord dans différentes langues et traduit chaque message - sous le nom de l&#x27;auteur.">
+<link rel="canonical" href="https://yatb.gladi.de/fr/">
+<link rel="alternate" hreflang="en" href="https://yatb.gladi.de/en/"><link rel="alternate" hreflang="de" href="https://yatb.gladi.de/de/"><link rel="alternate" hreflang="fr" href="https://yatb.gladi.de/fr/"><link rel="alternate" hreflang="es" href="https://yatb.gladi.de/es/"><link rel="alternate" hreflang="it" href="https://yatb.gladi.de/it/"><link rel="alternate" hreflang="ru" href="https://yatb.gladi.de/ru/"><link rel="alternate" hreflang="nl" href="https://yatb.gladi.de/nl/"><link rel="alternate" hreflang="x-default" href="https://yatb.gladi.de/en/">
+<meta property="og:title" content="YATB - Communique au-delà des langues sur Discord">
+<meta property="og:description" content="YATB relie des salons Discord dans différentes langues et traduit chaque message - sous le nom de l&#x27;auteur.">
+<meta property="og:image" content="https://yatb.gladi.de/static/img/og.jpg?v=1644ae2b30">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0b1220">
+<link rel="icon" href="/static/img/favicon-32.png?v=c453f22671" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png?v=25adda10a1">
+<link rel="stylesheet" href="/static/style.css?v=4737b925e3">
+</head>
+<body>
+<header class="top">
+<div class="wrap bar">
+<a class="brand" href="/fr/"><img src="/static/img/mark-96.webp?v=5b8ef5cfa5" width="40" height="40" alt=""><span>YATB</span></a>
+<input type="checkbox" id="menu-toggle" class="menu-toggle">
+<label for="menu-toggle" class="menu-button">Menu</label>
+<nav class="nav" aria-label="Menu"><ul><li><a href="/fr/members">Pour les membres</a></li><li><a href="/fr/admins">Pour les administrateurs</a></li><li><a href="/fr/keys">Clés API</a></li></ul></nav>
+<details class="langs"><summary aria-label="Langue"><span aria-hidden="true">🌐</span> FR</summary><ul><li><a href="/en/" hreflang="en" lang="en">English</a></li><li><a href="/de/" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/" hreflang="fr" lang="fr" aria-current="true">Français</a></li><li><a href="/es/" hreflang="es" lang="es">Español</a></li><li><a href="/it/" hreflang="it" lang="it">Italiano</a></li><li><a href="/ru/" hreflang="ru" lang="ru">Русский</a></li><li><a href="/nl/" hreflang="nl" lang="nl">Nederlands</a></li></ul></details>
+</div>
+</header>
+<main class="wrap">
+
+<section class="hero">
+<img class="hero-logo" src="/static/img/logo-512.webp?v=75dc41f6d1" width="256" height="256" alt="YATB">
+<div>
+<h1>Communique au-delà des langues sur Discord</h1>
+<p class="lead">YATB - <em>Yet Another Translation Bot</em> - relie des salons dans différentes langues. Chacun écrit dans sa propre langue, YATB publie la traduction dans les autres salons, sous le nom et l'avatar de l'auteur.</p>
+<ul class="badges"><li>7 langues</li><li>Aucun texte de message stocké</li><li>Bot privé</li></ul>
+</div>
+</section>
+<figure class="example"><div class="chan"><div class="chan-name"># english</div><div class="msg"><div class="avatar" aria-hidden="true">M</div><div><div class="author">Mia</div><div class="text">Anyone up for a raid tonight? Meet at 8 pm in <span class="mention">#voice</span> 🎮</div></div></div></div><div class="arrow" aria-hidden="true">→</div><div class="chan"><div class="chan-name"># français</div><div class="msg"><div class="avatar" aria-hidden="true">M</div><div><div class="author">Mia <span class=tag>[AI]</span></div><div class="text">Quelqu'un est partant pour un raid ce soir ? On se retrouve à 20 h dans <span class="mention">#voice</span> 🎮</div></div></div></div><figcaption>Exemple d'une paire de salons liés. L'étiquette après le nom indique quel service a effectué la traduction.</figcaption></figure>
+<section><h2>Ce que fait YATB</h2><div class="grid"><div class="card"><h3>Traductions naturelles</h3><p>Une traduction par IA qui comprend la conversation : l'argot, le jargon de jeu et les réponses courtes sont traduits correctement. Si un service échoue, le suivant prend le relais.</p></div><div class="card"><h3>Préserve le formatage Discord</h3><p>Le gras, les listes, les citations, les spoilers, les emojis, les mentions et les liens restent intacts. Le vrai code n'est pas traduit.</p></div><div class="card"><h3>Reflète la conversation</h3><p>Les réponses, modifications, suppressions, réactions et fils de discussion sont répliqués dans tous les canaux liés. Les annonces des canaux suivis sont également traduites.</p></div><div class="card"><h3>Confidentialité dès la conception</h3><p>Aucun texte de message n'est stocké. Chaque membre peut choisir que ses messages ne soient traduits que sur notre propre serveur.</p></div><div class="card"><h3>Tes clés, ton budget</h3><p>Les administrateurs de serveur ajoutent leurs propres clés API dans un formulaire privé. Les clés sont stockées de manière chiffrée et ne sont plus jamais affichées. Limites et alertes budgétaires incluses.</p></div><div class="card"><h3>Toujours une traduction</h3><p>Sans aucune clé, YATB traduit avec LibreTranslate sur notre propre serveur - gratuitement, et rien ne quitte le serveur.</p></div></div></section>
+<section><h2>Comment ça marche</h2><ol class="steps"><li><strong>Les admins lient des canaux</strong> - par exemple <code>#english</code> et <code>#deutsch</code> - dans un Bridge.</li><li><strong>Les membres écrivent simplement</strong> dans leur langue. Aucune commande n'est nécessaire.</li><li><strong>YATB publie la traduction</strong> dans les autres canaux en quelques secondes.</li></ol></section>
+<section class="note"><h2>Puis-je ajouter YATB à mon serveur ?</h2><p>Pas pour le moment. YATB est un bot privé qui ne fonctionne que sur des serveurs sélectionnés. Si YATB est déjà sur ton serveur, consulte les guides <a href="members">pour les membres</a> et <a href="admins">pour les admins</a>.</p></section>
+<section class="support"><h2>Tu aimes YATB ?</h2><p>YATB est gratuit et sans publicité. Si tu souhaites aider à couvrir les frais de fonctionnement, tu peux nous soutenir sur Ko-fi.</p><a class="kofi" href="https://ko-fi.com/letsgo2u" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> Soutiens YATB sur Ko-fi</a></section>
+</main>
+<footer class="foot">
+<div class="wrap">
+<p class="foot-links"><a href="/fr/privacy">Confidentialité</a> · <a href="/fr/terms">Conditions d'utilisation</a></p>
+<a class="kofi" href="https://ko-fi.com/letsgo2u" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> Soutiens YATB sur Ko-fi</a>
+<p class="muted">YATB est un projet privé à but non lucratif et n'est pas affilié à Discord.</p>
+</div>
+</footer>
+</body>
+</html>

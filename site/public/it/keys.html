@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Ottenere chiavi API · YATB</title>
+<meta name="description" content="YATB collega canali Discord in lingue diverse e traduce ogni messaggio sotto il nome dell&#x27;autore.">
+<link rel="canonical" href="https://yatb.gladi.de/it/keys">
+<link rel="alternate" hreflang="en" href="https://yatb.gladi.de/en/keys"><link rel="alternate" hreflang="de" href="https://yatb.gladi.de/de/keys"><link rel="alternate" hreflang="fr" href="https://yatb.gladi.de/fr/keys"><link rel="alternate" hreflang="es" href="https://yatb.gladi.de/es/keys"><link rel="alternate" hreflang="it" href="https://yatb.gladi.de/it/keys"><link rel="alternate" hreflang="ru" href="https://yatb.gladi.de/ru/keys"><link rel="alternate" hreflang="nl" href="https://yatb.gladi.de/nl/keys"><link rel="alternate" hreflang="x-default" href="https://yatb.gladi.de/en/keys">
+<meta property="og:title" content="Ottenere chiavi API · YATB">
+<meta property="og:description" content="YATB collega canali Discord in lingue diverse e traduce ogni messaggio sotto il nome dell&#x27;autore.">
+<meta property="og:image" content="https://yatb.gladi.de/static/img/og.jpg?v=1644ae2b30">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0b1220">
+<link rel="icon" href="/static/img/favicon-32.png?v=c453f22671" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png?v=25adda10a1">
+<link rel="stylesheet" href="/static/style.css?v=4737b925e3">
+</head>
+<body>
+<header class="top">
+<div class="wrap bar">
+<a class="brand" href="/it/"><img src="/static/img/mark-96.webp?v=5b8ef5cfa5" width="40" height="40" alt=""><span>YATB</span></a>
+<input type="checkbox" id="menu-toggle" class="menu-toggle">
+<label for="menu-toggle" class="menu-button">Menu</label>
+<nav class="nav" aria-label="Menu"><ul><li><a href="/it/members">Per i membri</a></li><li><a href="/it/admins">Per gli amministratori</a></li><li><a href="/it/keys" aria-current="page">Chiavi API</a></li></ul></nav>
+<details class="langs"><summary aria-label="Lingua"><span aria-hidden="true">🌐</span> IT</summary><ul><li><a href="/en/keys" hreflang="en" lang="en">English</a></li><li><a href="/de/keys" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/keys" hreflang="fr" lang="fr">Français</a></li><li><a href="/es/keys" hreflang="es" lang="es">Español</a></li><li><a href="/it/keys" hreflang="it" lang="it" aria-current="true">Italiano</a></li><li><a href="/ru/keys" hreflang="ru" lang="ru">Русский</a></li><li><a href="/nl/keys" hreflang="nl" lang="nl">Nederlands</a></li></ul></details>
+</div>
+</header>
+<main class="wrap">
+
+<h1>Ottenere chiavi API</h1>
+<p class="lead">Le chiavi API rendono le traduzioni migliori rispetto al LibreTranslate gratuito. Ogni chiave appartiene a te o al tuo server: YATB la utilizza solo per il tuo server e la archivia crittografata.</p>
+<section class="note"><ul><li>Imposta un <strong>limite di spesa</strong> nell'account del tuo provider oltre al budget in YATB.</li><li>Dove disponibile, attiva la <strong>conservazione zero dei dati</strong> o disattiva l'addestramento sui tuoi dati.</li><li>Aggiungi chiavi con <code>/yatb keys add</code>: scegli il provider, quindi incolla la chiave nel modulo privato.</li></ul></section>
+<nav class="toc"><ul><li><a href="#gemini">Google Gemini</a></li><li><a href="#mistral">Mistral</a></li><li><a href="#groq">Groq</a></li><li><a href="#novita">Novita</a></li><li><a href="#google_translate">Google Translate</a></li><li><a href="#azure">Azure Translator</a></li></ul></nav>
+<article class="card provider" id="gemini">
+<h2>Google Gemini <span class="badge">Provider AI</span></h2>
+<h3>Passaggi</h3><ol><li>Apri <a href="https://aistudio.google.com" rel="noopener">aistudio.google.com</a> e accedi con il tuo account Google.</li><li>Crea o scegli un progetto Google Cloud e <strong>abilita la fatturazione</strong> (il piano [Free] potrebbe non essere utilizzabile per utenti in SEE, Regno Unito o Svizzera).</li><li><strong>Get API key</strong> → <strong>Create API key</strong> per questo progetto.</li><li>Esegui <code>/yatb keys add</code>, scegli <strong>Google Gemini</strong> e incolla la chiave.</li></ol>
+<h3>Piano</h3><p>È possibile utilizzare solo chiavi [Paid] (progetto/account con fatturazione).</p>
+<h3>Privacy</h3><p>Solo chiavi con fatturazione attiva - il piano gratuito potrebbe non essere utilizzabile per gli utenti nello SEE, nel Regno Unito o in Svizzera. Piano a pagamento: Google non utilizza i contenuti per migliorare i propri prodotti; i prompt vengono registrati per un periodo limitato per rilevare abusi. Elaborato da Google a livello globale. <a href="https://ai.google.dev/gemini-api/terms" rel="noopener">Informativa sulla privacy del fornitore</a></p>
+<p><a class="button" href="https://aistudio.google.com" rel="noopener">Apri console →</a></p>
+</article><article class="card provider" id="mistral">
+<h2>Mistral <span class="badge">Provider AI</span></h2>
+<h3>Passaggi</h3><ol><li>Accedi su <a href="https://console.mistral.ai" rel="noopener">console.mistral.ai</a>.</li><li>Sotto <strong>Billing</strong> scegli un piano [Paid] (il piano [Free] Experiment potrebbe usare i tuoi dati per l'addestramento).</li><li><strong>API Keys</strong> → <strong>Create new key</strong>.</li><li>Esegui <code>/yatb keys add</code>, scegli <strong>Mistral</strong> e incolla la chiave.</li></ol>
+<h3>Piano</h3><p>Sono possibili chiavi [Free] e [Paid]. Con una chiave [Free] si applicano i limiti del provider; con una chiave [Paid] imposti un budget mensile.</p>
+<h3>Privacy</h3><p>Mistral AI (Francia). Nessun addestramento sui tuoi contenuti, salvo dove consentito da un'impostazione del prodotto: nella console Mistral, sotto <strong>Privacy</strong>, disattiva l'uso dei dati API per il miglioramento. Il piano gratuito potrebbe utilizzare i dati per l'addestramento a meno che tu non scelga di non partecipare. È disponibile un DPA, conservazione dei dati pari a zero su richiesta. <a href="https://legal.mistral.ai/terms/commercial-terms-of-service" rel="noopener">Informativa sulla privacy del fornitore</a></p>
+<p><a class="button" href="https://console.mistral.ai" rel="noopener">Apri console →</a></p>
+</article><article class="card provider" id="groq">
+<h2>Groq <span class="badge">Provider AI</span></h2>
+<h3>Passaggi</h3><ol><li>Accedi su <a href="https://console.groq.com" rel="noopener">console.groq.com</a>.</li><li>Consigliato: abilita la conservazione zero dei dati in <strong>Settings → Data Controls</strong>.</li><li><strong>API Keys</strong> → <strong>Create API Key</strong>.</li><li>Esegui <code>/yatb keys add</code> e scegli <strong>Groq</strong>. Il piano [Free] ha limiti bassi (circa 30 richieste al minuto).</li></ol>
+<h3>Piano</h3><p>Sono possibili chiavi [Free] e [Paid]. Con una chiave [Free] si applicano i limiti del provider; con una chiave [Paid] imposti un budget mensile.</p>
+<h3>Privacy</h3><p>Per impostazione predefinita, Groq non conserva i dati di inferenza; i log per la risoluzione dei problemi o gli abusi vengono conservati fino a 30 giorni. La conservazione dei dati pari a zero può essere attivata per chiunque sotto <strong>Data Controls</strong>. I dati sono archiviati negli Stati Uniti. <a href="https://console.groq.com/docs/your-data" rel="noopener">Informativa sulla privacy del fornitore</a></p>
+<p><a class="button" href="https://console.groq.com" rel="noopener">Apri console →</a></p>
+</article><article class="card provider" id="novita">
+<h2>Novita <span class="badge">Provider AI</span></h2>
+<h3>Passaggi</h3><ol><li>Accedi su <a href="https://novita.ai" rel="noopener">novita.ai</a> e aggiungi credito (non esiste un piano [Free]).</li><li>Crea una chiave in <strong>Key Management</strong>.</li><li>Esegui <code>/yatb keys add</code> e scegli <strong>Novita</strong>.</li></ol>
+<h3>Piano</h3><p>È possibile utilizzare solo chiavi [Paid] (progetto/account con fatturazione).</p>
+<h3>Privacy</h3><p>Secondo i suoi termini: conservazione dei dati pari a zero e nessun addestramento sui tuoi contenuti per impostazione predefinita. I metadati di utilizzo vengono conservati fino a 2 anni; i dati possono essere elaborati negli Stati Uniti (SCC). Un DPA è disponibile solo per i clienti enterprise. Disciplinato dalla legge del Delaware, USA. <a href="https://novita.ai/legal/terms-of-service" rel="noopener">Informativa sulla privacy del fornitore</a></p>
+<p><a class="button" href="https://novita.ai" rel="noopener">Apri console →</a></p>
+</article><article class="card provider" id="google_translate">
+<h2>Google Translate <span class="badge">Servizio di traduzione</span></h2>
+<h3>Passaggi</h3><ol><li>Apri <a href="https://console.cloud.google.com" rel="noopener">console.cloud.google.com</a> e crea un progetto.</li><li>Abilita la <strong>Cloud Translation API</strong> (è richiesto un account di fatturazione; i primi 500.000 caratteri al mese sono [Free]).</li><li><strong>APIs &amp; Services → Credentials → Create credentials → API key</strong>, quindi limita la chiave alla Cloud Translation API.</li><li>Esegui <code>/yatb keys add</code> e scegli <strong>Google Translate</strong>.</li></ol>
+<h3>Piano</h3><p>Sono possibili chiavi [Free] e [Paid]. Con una chiave [Free] si applicano i limiti del provider; con una chiave [Paid] imposti un budget mensile.</p>
+<h3>Privacy</h3><p>Il testo viene mantenuto in memoria solo per la traduzione e non viene utilizzato per addestrare o migliorare la traduzione di Google. Elaborato da Google a livello globale. <a href="https://docs.cloud.google.com/translate/data-usage" rel="noopener">Informativa sulla privacy del fornitore</a></p>
+<p><a class="button" href="https://console.cloud.google.com" rel="noopener">Apri console →</a></p>
+</article><article class="card provider" id="azure">
+<h2>Azure Translator <span class="badge">Servizio di traduzione</span></h2>
+<h3>Passaggi</h3><ol><li>In <a href="https://portal.azure.com" rel="noopener">portal.azure.com</a> crea una risorsa <strong>Translator</strong> (piano tariffario <strong>F0</strong> = 2 milioni di caratteri al mese [Free]).</li><li>Apri <strong>Keys and Endpoint</strong>: copia <strong>Key 1</strong> e la <strong>Location/Region</strong> (es. westeurope).</li><li>Esegui <code>/yatb keys add</code>, scegli <strong>Azure Translator</strong> e inserisci chiave e regione.</li></ol>
+<h3>Piano</h3><p>Sono possibili chiavi [Free] e [Paid]. Con una chiave [Free] si applicano i limiti del provider; con una chiave [Paid] imposti un budget mensile.</p>
+<h3>Privacy</h3><p>La traduzione del testo non archivia il testo ("nessuna traccia"). YATB utilizza l'endpoint globale, quindi le richieste possono essere elaborate in qualsiasi data center Microsoft, solitamente quello più vicino. <a href="https://learn.microsoft.com/azure/ai-foundry/responsible-ai/translator/data-privacy-security" rel="noopener">Informativa sulla privacy del fornitore</a></p>
+<p><a class="button" href="https://portal.azure.com" rel="noopener">Apri console →</a></p>
+</article>
+<p class="muted">I nomi dei menu presso i fornitori possono cambiare. Stato dell'informativa sulla privacy: 2026-10-20.</p>
+</main>
+<footer class="foot">
+<div class="wrap">
+<p class="foot-links"><a href="/it/privacy">Privacy</a> · <a href="/it/terms">Termini</a></p>
+<a class="kofi" href="https://ko-fi.com/letsgo2u" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> Supporta YATB su Ko-fi</a>
+<p class="muted">YATB è un progetto privato e non commerciale e non è affiliato a Discord.</p>
+</div>
+</footer>
+</body>
+</html>

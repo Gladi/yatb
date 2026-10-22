@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Privacy policy · YATB</title>
+<meta name="description" content="YATB links Discord channels in different languages and translates every message - under the author&#x27;s name.">
+<link rel="canonical" href="https://yatb.gladi.de/en/privacy">
+<link rel="alternate" hreflang="en" href="https://yatb.gladi.de/en/privacy"><link rel="alternate" hreflang="de" href="https://yatb.gladi.de/de/privacy"><link rel="alternate" hreflang="fr" href="https://yatb.gladi.de/fr/privacy"><link rel="alternate" hreflang="es" href="https://yatb.gladi.de/es/privacy"><link rel="alternate" hreflang="it" href="https://yatb.gladi.de/it/privacy"><link rel="alternate" hreflang="ru" href="https://yatb.gladi.de/ru/privacy"><link rel="alternate" hreflang="nl" href="https://yatb.gladi.de/nl/privacy"><link rel="alternate" hreflang="x-default" href="https://yatb.gladi.de/en/privacy">
+<meta property="og:title" content="Privacy policy · YATB">
+<meta property="og:description" content="YATB links Discord channels in different languages and translates every message - under the author&#x27;s name.">
+<meta property="og:image" content="https://yatb.gladi.de/static/img/og.jpg?v=1644ae2b30">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0b1220">
+<link rel="icon" href="/static/img/favicon-32.png?v=c453f22671" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png?v=25adda10a1">
+<link rel="stylesheet" href="/static/style.css?v=4737b925e3">
+</head>
+<body>
+<header class="top">
+<div class="wrap bar">
+<a class="brand" href="/en/"><img src="/static/img/mark-96.webp?v=5b8ef5cfa5" width="40" height="40" alt=""><span>YATB</span></a>
+<input type="checkbox" id="menu-toggle" class="menu-toggle">
+<label for="menu-toggle" class="menu-button">Menu</label>
+<nav class="nav" aria-label="Menu"><ul><li><a href="/en/members">For members</a></li><li><a href="/en/admins">For admins</a></li><li><a href="/en/keys">API keys</a></li></ul></nav>
+<details class="langs"><summary aria-label="Language"><span aria-hidden="true">🌐</span> EN</summary><ul><li><a href="/en/privacy" hreflang="en" lang="en" aria-current="true">English</a></li><li><a href="/de/privacy" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/privacy" hreflang="fr" lang="fr">Français</a></li><li><a href="/es/privacy" hreflang="es" lang="es">Español</a></li><li><a href="/it/privacy" hreflang="it" lang="it">Italiano</a></li><li><a href="/ru/privacy" hreflang="ru" lang="ru">Русский</a></li><li><a href="/nl/privacy" hreflang="nl" lang="nl">Nederlands</a></li></ul></details>
+</div>
+</header>
+<main class="wrap">
+
+<h1>Privacy policy</h1>
+<p class="lead">This page explains which data the YATB website and the YATB Discord bot process, why, and for how long.</p>
+<section><h2>1. Who is responsible</h2><p class="placeholder">Contact details of the operator will be added here.</p></section>
+<section><h2>2. This website</h2><ul><li>The information pages use no cookies, no tracking, no analytics and no external fonts or scripts.</li><li>To deliver the pages, your browser's IP address and request are processed briefly by the web server. The web server does not keep access logs.</li><li>The website runs on a server of Oracle Cloud in Frankfurt (Germany). HTTPS certificates come from Let's Encrypt; no visitor data is shared for this.</li><li>Links to other sites (Discord, Ko-fi, providers) are normal links - their privacy policies apply there.</li></ul><h3>Dashboard (login with Discord)</h3><ul><li>At <code>/app</code> you can log in with Discord. YATB only receives your Discord user ID and name (scope <code>identify</code>). Discord's access token is revoked right after login and never stored.</li><li>A session cookie (<code>yatb_session</code>, valid 7 days) keeps you logged in; during login a second cookie protects against forged logins for at most 10 minutes. Both are technically necessary and are not used for anything else.</li><li>Stored on our server: a hash of the session token, your Discord ID, display name, language and the expiry date - deleted when you log out or after 7 days.</li><li>Whether you may manage a server is checked by the bot directly with Discord on every request. Changes you make are reported in that server's log channel with your name.</li></ul></section>
+<section><h2>3. The Discord bot</h2><p>YATB only processes messages in channels that the admins of a server linked to a bridge.</p>
+<div class="table-wrap"><table><thead><tr><th>Data</th><th>Purpose</th><th>Kept for</th></tr></thead><tbody><tr><td>Message text and display name</td><td>Translation; sent to the translation services of the server (see 4). AI providers also get up to 4 previous messages of the conversation as context.</td><td>Not stored. Held in memory only while translating; the context of recent messages is lost on every restart.</td></tr><tr><td>Message IDs and a checksum of the text</td><td>Mirroring replies, edits and deletes to the translations</td><td>7 days</td></tr><tr><td>Your user ID and your privacy choice</td><td>Respecting <code>/yatb-user privacy</code> on every server</td><td>Until you ask for deletion</td></tr><tr><td>Usage statistics: server, service, languages, number of characters, duration, result - no text, no user IDs</td><td>Limits, costs, reliability of the services</td><td>90 days, after that only daily totals per server</td></tr><tr><td>Server settings: bridges, log channel, encrypted API keys, ID of the admin who added a key</td><td>Running the bot on the server</td><td>Until removed, <code>/yatb reset</code> or <code>/yatb uninstall</code></td></tr><tr><td>Encrypted backups of the data above (never message texts)</td><td>Recovery after errors</td><td>14 days on the server, 30 days in Oracle Object Storage (Frankfurt)</td></tr></tbody></table></div></section>
+<section><h2>4. Translation services</h2><p>The admins of each server decide which services translate their messages. Messages of members with <em>Local only</em> are only translated by LibreTranslate on our own server. On servers run by the operator, the operator's own paid accounts are used.</p>
+<div class="table-wrap"><table><thead><tr><th>Service</th><th>What the provider says</th></tr></thead><tbody><tr><td>Google Gemini</td><td>Only keys with billing enabled - the free tier may not be used for users in the EEA, the UK or Switzerland. Paid tier: Google does not use the content to improve its products; prompts are logged for a limited time to detect abuse. Processed by Google worldwide. <a href="https://ai.google.dev/gemini-api/terms" rel="noopener">Provider's privacy information</a></td></tr><tr><td>Mistral</td><td>Mistral AI (France). No training on your content - except where a product setting allows it: in the Mistral console under <strong>Privacy</strong>, switch off the use of API data for improvement. The free plan may use data for training unless you opt out. A DPA is available, zero data retention on request. <a href="https://legal.mistral.ai/terms/commercial-terms-of-service" rel="noopener">Provider's privacy information</a></td></tr><tr><td>Groq</td><td>By default Groq does not keep inference data; logs for troubleshooting or abuse are kept up to 30 days. Zero data retention can be switched on for everyone under <strong>Data Controls</strong>. Data is stored in the USA. <a href="https://console.groq.com/docs/your-data" rel="noopener">Provider's privacy information</a></td></tr><tr><td>Novita</td><td>According to its terms: zero data retention and no training on your content by default. Usage metadata is kept up to 2 years; data may be processed in the USA (SCC). A DPA only for enterprise customers. Governed by the law of Delaware, USA. <a href="https://novita.ai/legal/terms-of-service" rel="noopener">Provider's privacy information</a></td></tr><tr><td>Google Translate</td><td>The text is only held in memory for the translation and is not used to train or improve Google's translation. Processed by Google worldwide. <a href="https://docs.cloud.google.com/translate/data-usage" rel="noopener">Provider's privacy information</a></td></tr><tr><td>Azure Translator</td><td>Text translation does not store the text ("no trace"). YATB uses the global endpoint, so requests may be processed in any Microsoft data center, usually the nearest one. <a href="https://learn.microsoft.com/azure/ai-foundry/responsible-ai/translator/data-privacy-security" rel="noopener">Provider's privacy information</a></td></tr><tr><td>LibreTranslate</td><td>Runs on our own server in Frankfurt (Germany). Nothing is sent to third parties.</td></tr></tbody></table></div></section>
+<section><h2>5. Discord</h2><p>Messages are written and shown on Discord. Discord processes them under its own <a href="https://discord.com/privacy" rel="noopener">privacy policy</a>.</p></section>
+<section><h2>6. Legal basis</h2><p>Art. 6(1)(f) GDPR - our legitimate interest, and the interest of the server communities, in multilingual communication and in a secure, reliable service. Your choice of <em>Local only</em> limits the processing to our own server.</p></section>
+<section><h2>7. Your rights</h2><p>You have the right to access, rectification, erasure, restriction of processing, data portability and to object, and you can complain to a data protection supervisory authority. To exercise your rights, contact the operator (section 1). In Discord, <code>/yatb-user privacy</code> lets you choose <em>Local only</em> at any time.</p></section>
+<p class="muted">Last updated: 2026-10-20<br>This text is available in several languages. If the versions differ, the German version applies.</p>
+</main>
+<footer class="foot">
+<div class="wrap">
+<p class="foot-links"><a href="/en/privacy">Privacy</a> · <a href="/en/terms">Terms</a></p>
+<a class="kofi" href="https://ko-fi.com/letsgo2u" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> Support YATB on Ko-fi</a>
+<p class="muted">YATB is a private, non-commercial project and is not affiliated with Discord.</p>
+</div>
+</footer>
+</body>
+</html>

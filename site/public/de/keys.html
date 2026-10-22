@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>API-Keys besorgen · YATB</title>
+<meta name="description" content="YATB verbindet Discord-Kanäle in verschiedenen Sprachen und übersetzt jede Nachricht - unter dem Namen der Verfasserin oder des Verfassers.">
+<link rel="canonical" href="https://yatb.gladi.de/de/keys">
+<link rel="alternate" hreflang="en" href="https://yatb.gladi.de/en/keys"><link rel="alternate" hreflang="de" href="https://yatb.gladi.de/de/keys"><link rel="alternate" hreflang="fr" href="https://yatb.gladi.de/fr/keys"><link rel="alternate" hreflang="es" href="https://yatb.gladi.de/es/keys"><link rel="alternate" hreflang="it" href="https://yatb.gladi.de/it/keys"><link rel="alternate" hreflang="ru" href="https://yatb.gladi.de/ru/keys"><link rel="alternate" hreflang="nl" href="https://yatb.gladi.de/nl/keys"><link rel="alternate" hreflang="x-default" href="https://yatb.gladi.de/en/keys">
+<meta property="og:title" content="API-Keys besorgen · YATB">
+<meta property="og:description" content="YATB verbindet Discord-Kanäle in verschiedenen Sprachen und übersetzt jede Nachricht - unter dem Namen der Verfasserin oder des Verfassers.">
+<meta property="og:image" content="https://yatb.gladi.de/static/img/og.jpg?v=1644ae2b30">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0b1220">
+<link rel="icon" href="/static/img/favicon-32.png?v=c453f22671" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png?v=25adda10a1">
+<link rel="stylesheet" href="/static/style.css?v=4737b925e3">
+</head>
+<body>
+<header class="top">
+<div class="wrap bar">
+<a class="brand" href="/de/"><img src="/static/img/mark-96.webp?v=5b8ef5cfa5" width="40" height="40" alt=""><span>YATB</span></a>
+<input type="checkbox" id="menu-toggle" class="menu-toggle">
+<label for="menu-toggle" class="menu-button">Menü</label>
+<nav class="nav" aria-label="Menü"><ul><li><a href="/de/members">Für Mitglieder</a></li><li><a href="/de/admins">Für Admins</a></li><li><a href="/de/keys" aria-current="page">API-Keys</a></li></ul></nav>
+<details class="langs"><summary aria-label="Sprache"><span aria-hidden="true">🌐</span> DE</summary><ul><li><a href="/en/keys" hreflang="en" lang="en">English</a></li><li><a href="/de/keys" hreflang="de" lang="de" aria-current="true">Deutsch</a></li><li><a href="/fr/keys" hreflang="fr" lang="fr">Français</a></li><li><a href="/es/keys" hreflang="es" lang="es">Español</a></li><li><a href="/it/keys" hreflang="it" lang="it">Italiano</a></li><li><a href="/ru/keys" hreflang="ru" lang="ru">Русский</a></li><li><a href="/nl/keys" hreflang="nl" lang="nl">Nederlands</a></li></ul></details>
+</div>
+</header>
+<main class="wrap">
+
+<h1>API-Keys besorgen</h1>
+<p class="lead">Mit API-Keys werden die Übersetzungen besser als mit dem kostenlosen LibreTranslate. Jeder Key gehört dir bzw. deinem Server - YATB nutzt ihn nur für deinen Server und speichert ihn verschlüsselt.</p>
+<section class="note"><ul><li>Lege im Konto des Anbieters zusätzlich zum Budget in YATB ein <strong>Ausgabenlimit</strong> fest.</li><li>Wo möglich, schalte <strong>Zero Data Retention</strong> ein bzw. das Training mit deinen Daten aus.</li><li>Keys hinzufügen mit <code>/yatb keys add</code>: Anbieter wählen, dann den Key in das private Formular einfügen.</li></ul></section>
+<nav class="toc"><ul><li><a href="#gemini">Google Gemini</a></li><li><a href="#mistral">Mistral</a></li><li><a href="#groq">Groq</a></li><li><a href="#novita">Novita</a></li><li><a href="#google_translate">Google Translate</a></li><li><a href="#azure">Azure Translator</a></li></ul></nav>
+<article class="card provider" id="gemini">
+<h2>Google Gemini <span class="badge">KI-Anbieter</span></h2>
+<h3>Schritte</h3><ol><li>Öffne <a href="https://aistudio.google.com" rel="noopener">aistudio.google.com</a> und melde dich mit deinem Google-Konto an.</li><li>Lege ein Google-Cloud-Projekt an oder wähle eines und <strong>aktiviere die Abrechnung</strong> - die kostenlose Stufe darf für Nutzer im EWR, in UK und der Schweiz nicht genutzt werden.</li><li><strong>Get API key</strong> → <strong>Create API key</strong> für dieses Projekt.</li><li><code>/yatb keys add</code> ausführen, <strong>Google Gemini</strong> wählen und den Key einfügen.</li></ol>
+<h3>Tarif</h3><p>Nur bezahlte Keys (Projekt/Konto mit Abrechnung) sind nutzbar.</p>
+<h3>Datenschutz</h3><p>Nur Keys mit aktivierter Abrechnung - die Gratis-Stufe darf für Nutzer im EWR, im Vereinigten Königreich und in der Schweiz nicht verwendet werden. Bezahlte Stufe: Google nutzt die Inhalte nicht zur Verbesserung seiner Produkte; Anfragen werden für begrenzte Zeit protokolliert, um Missbrauch zu erkennen. Verarbeitung durch Google weltweit. <a href="https://ai.google.dev/gemini-api/terms" rel="noopener">Datenschutzangaben des Anbieters</a></p>
+<p><a class="button" href="https://aistudio.google.com" rel="noopener">Konsole öffnen →</a></p>
+</article><article class="card provider" id="mistral">
+<h2>Mistral <span class="badge">KI-Anbieter</span></h2>
+<h3>Schritte</h3><ol><li>Melde dich bei <a href="https://console.mistral.ai" rel="noopener">console.mistral.ai</a> an.</li><li>Wähle unter <strong>Billing</strong> einen bezahlten Tarif (der kostenlose Experiment-Tarif darf deine Daten zum Training nutzen).</li><li><strong>API Keys</strong> → <strong>Create new key</strong>.</li><li><code>/yatb keys add</code> ausführen, <strong>Mistral</strong> wählen und den Key einfügen.</li></ol>
+<h3>Tarif</h3><p>Kostenlose und bezahlte Keys sind möglich. Bei kostenlosen Keys gelten die Limits des Anbieters, bei bezahlten legst du ein Monatsbudget fest.</p>
+<h3>Datenschutz</h3><p>Mistral AI (Frankreich). Kein Training mit deinen Inhalten - außer eine Produkteinstellung erlaubt es: In der Mistral-Konsole unter <strong>Privacy</strong> die Nutzung von API-Daten zur Verbesserung ausschalten. Im kostenlosen Tarif können Daten zum Training genutzt werden, wenn du nicht widersprichst. Ein Auftragsverarbeitungsvertrag (DPA) ist verfügbar, Zero Data Retention auf Antrag. <a href="https://legal.mistral.ai/terms/commercial-terms-of-service" rel="noopener">Datenschutzangaben des Anbieters</a></p>
+<p><a class="button" href="https://console.mistral.ai" rel="noopener">Konsole öffnen →</a></p>
+</article><article class="card provider" id="groq">
+<h2>Groq <span class="badge">KI-Anbieter</span></h2>
+<h3>Schritte</h3><ol><li>Melde dich bei <a href="https://console.groq.com" rel="noopener">console.groq.com</a> an.</li><li>Empfohlen: Unter <strong>Settings → Data Controls</strong> die Datenspeicherung abschalten (Zero Data Retention).</li><li><strong>API Keys</strong> → <strong>Create API Key</strong>.</li><li><code>/yatb keys add</code> ausführen und <strong>Groq</strong> wählen. Der kostenlose Tarif hat niedrige Limits (etwa 30 Anfragen pro Minute).</li></ol>
+<h3>Tarif</h3><p>Kostenlose und bezahlte Keys sind möglich. Bei kostenlosen Keys gelten die Limits des Anbieters, bei bezahlten legst du ein Monatsbudget fest.</p>
+<h3>Datenschutz</h3><p>Groq speichert Anfragedaten standardmäßig nicht; Protokolle zur Fehlersuche oder bei Missbrauch werden bis zu 30 Tage aufbewahrt. Zero Data Retention kann jeder unter <strong>Data Controls</strong> einschalten. Die Daten liegen in den USA. <a href="https://console.groq.com/docs/your-data" rel="noopener">Datenschutzangaben des Anbieters</a></p>
+<p><a class="button" href="https://console.groq.com" rel="noopener">Konsole öffnen →</a></p>
+</article><article class="card provider" id="novita">
+<h2>Novita <span class="badge">KI-Anbieter</span></h2>
+<h3>Schritte</h3><ol><li>Melde dich bei <a href="https://novita.ai" rel="noopener">novita.ai</a> an und lade Guthaben auf (es gibt keinen kostenlosen Tarif).</li><li>Unter <strong>Key Management</strong> einen Key anlegen.</li><li><code>/yatb keys add</code> ausführen und <strong>Novita</strong> wählen.</li></ol>
+<h3>Tarif</h3><p>Nur bezahlte Keys (Projekt/Konto mit Abrechnung) sind nutzbar.</p>
+<h3>Datenschutz</h3><p>Laut Nutzungsbedingungen: Zero Data Retention und standardmäßig kein Training mit deinen Inhalten. Nutzungs-Metadaten werden bis zu 2 Jahre aufbewahrt; Verarbeitung auch in den USA möglich (Standardvertragsklauseln). Ein DPA nur für Enterprise-Kunden. Es gilt das Recht von Delaware (USA). <a href="https://novita.ai/legal/terms-of-service" rel="noopener">Datenschutzangaben des Anbieters</a></p>
+<p><a class="button" href="https://novita.ai" rel="noopener">Konsole öffnen →</a></p>
+</article><article class="card provider" id="google_translate">
+<h2>Google Translate <span class="badge">Übersetzungsdienst</span></h2>
+<h3>Schritte</h3><ol><li>Öffne <a href="https://console.cloud.google.com" rel="noopener">console.cloud.google.com</a> und lege ein Projekt an.</li><li>Aktiviere die <strong>Cloud Translation API</strong> (ein Rechnungskonto ist nötig; die ersten 500.000 Zeichen pro Monat sind kostenlos).</li><li><strong>APIs &amp; Dienste → Anmeldedaten → Anmeldedaten erstellen → API-Schlüssel</strong>, danach den Schlüssel auf die Cloud Translation API beschränken.</li><li><code>/yatb keys add</code> ausführen und <strong>Google Translate</strong> wählen.</li></ol>
+<h3>Tarif</h3><p>Kostenlose und bezahlte Keys sind möglich. Bei kostenlosen Keys gelten die Limits des Anbieters, bei bezahlten legst du ein Monatsbudget fest.</p>
+<h3>Datenschutz</h3><p>Der Text wird nur für die Übersetzung im Arbeitsspeicher gehalten und nicht zum Trainieren oder Verbessern der Google-Übersetzung genutzt. Verarbeitung durch Google weltweit. <a href="https://docs.cloud.google.com/translate/data-usage" rel="noopener">Datenschutzangaben des Anbieters</a></p>
+<p><a class="button" href="https://console.cloud.google.com" rel="noopener">Konsole öffnen →</a></p>
+</article><article class="card provider" id="azure">
+<h2>Azure Translator <span class="badge">Übersetzungsdienst</span></h2>
+<h3>Schritte</h3><ol><li>Lege in <a href="https://portal.azure.com" rel="noopener">portal.azure.com</a> eine <strong>Translator</strong>-Ressource an (Tarif <strong>F0</strong> = 2 Mio. Zeichen pro Monat kostenlos).</li><li>Öffne <strong>Schlüssel und Endpunkt</strong>: Kopiere <strong>Schlüssel 1</strong> und <strong>Standort/Region</strong> (z. B. westeurope).</li><li><code>/yatb keys add</code> ausführen, <strong>Azure Translator</strong> wählen und Key und Region eintragen.</li></ol>
+<h3>Tarif</h3><p>Kostenlose und bezahlte Keys sind möglich. Bei kostenlosen Keys gelten die Limits des Anbieters, bei bezahlten legst du ein Monatsbudget fest.</p>
+<h3>Datenschutz</h3><p>Die Textübersetzung speichert den Text nicht ("No Trace"). YATB nutzt den globalen Endpunkt, daher können Anfragen in jedem Microsoft-Rechenzentrum verarbeitet werden, meist im nächstgelegenen. <a href="https://learn.microsoft.com/azure/ai-foundry/responsible-ai/translator/data-privacy-security" rel="noopener">Datenschutzangaben des Anbieters</a></p>
+<p><a class="button" href="https://portal.azure.com" rel="noopener">Konsole öffnen →</a></p>
+</article>
+<p class="muted">Menünamen bei den Anbietern können sich ändern. Stand der Datenschutzangaben: 2026-10-20.</p>
+</main>
+<footer class="foot">
+<div class="wrap">
+<p class="foot-links"><a href="/de/privacy">Datenschutz</a> · <a href="/de/terms">Bedingungen</a></p>
+<a class="kofi" href="https://ko-fi.com/letsgo2u" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> YATB auf Ko-fi unterstützen</a>
+<p class="muted">YATB ist ein privates, nicht kommerzielles Projekt und steht in keiner Verbindung zu Discord.</p>
+</div>
+</footer>
+</body>
+</html>

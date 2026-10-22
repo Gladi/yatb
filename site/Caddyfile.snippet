@@ -1,0 +1,59 @@
+# YATB-Website - Vorlage für den Block in caddy/Caddyfile (Live) und für die lokale Vorschau.
+# Live (caddy/Caddyfile, site/ als /srv/yatb-site gemountet):
+#   import /srv/yatb-site/Caddyfile.snippet
+#   yatb.gladi.de { import yatb_site /srv/yatb-site/public }
+# Vorschau: siehe docs/betrieb.md, Abschnitt 7 (Caddyfile.preview importiert diese Datei).
+
+# Argument: Ordner mit der gebauten Seite
+(yatb_site) {
+	root * {args[0]}
+	encode zstd gzip
+
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+		-Server
+	}
+	# CSP und Cache für die statischen Seiten - /app (Dashboard) setzt eigene Regeln (yatb_app)
+	@site not path /app*
+	header @site Content-Security-Policy "default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+	@static path /static/*
+	header @static Cache-Control "public, max-age=31536000, immutable"
+	@pages not path /static/* /app*
+	header @pages Cache-Control "public, max-age=300"
+
+	# "/" -> Sprache des Browsers (erste passende Angabe), sonst Englisch
+	map {header.Accept-Language} {yatb_lang} {
+		~^\s*(de|fr|es|it|ru|nl)\b "${1}"
+		default "en"
+	}
+	@root path /
+	handle @root {
+		header Vary Accept-Language
+		redir * /{yatb_lang}/ 302
+	}
+	# Kurze Links für Discord-Texte: /members -> /<Sprache>/members usw.
+	@short path /members /admins /keys /privacy /terms /imprint
+	handle @short {
+		header Vary Accept-Language
+		redir * /{yatb_lang}{path} 302
+	}
+
+	handle {
+		try_files {path} {path}.html {path}/index.html
+		file_server
+	}
+	handle_errors {
+		rewrite * /404.html
+		file_server
+	}
+}
+
+# Dashboard (/app) -> Container yatb-web. Argument: Ziel, z. B. yatb-web:8080. Nur im Live-Block importieren.
+(yatb_app) {
+	handle /app* {
+		header Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'"
+		reverse_proxy {args[0]}
+	}
+}

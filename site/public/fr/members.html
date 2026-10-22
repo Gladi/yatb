@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Pour les membres · YATB</title>
+<meta name="description" content="YATB relie des salons Discord dans différentes langues et traduit chaque message - sous le nom de l&#x27;auteur.">
+<link rel="canonical" href="https://yatb.gladi.de/fr/members">
+<link rel="alternate" hreflang="en" href="https://yatb.gladi.de/en/members"><link rel="alternate" hreflang="de" href="https://yatb.gladi.de/de/members"><link rel="alternate" hreflang="fr" href="https://yatb.gladi.de/fr/members"><link rel="alternate" hreflang="es" href="https://yatb.gladi.de/es/members"><link rel="alternate" hreflang="it" href="https://yatb.gladi.de/it/members"><link rel="alternate" hreflang="ru" href="https://yatb.gladi.de/ru/members"><link rel="alternate" hreflang="nl" href="https://yatb.gladi.de/nl/members"><link rel="alternate" hreflang="x-default" href="https://yatb.gladi.de/en/members">
+<meta property="og:title" content="Pour les membres · YATB">
+<meta property="og:description" content="YATB relie des salons Discord dans différentes langues et traduit chaque message - sous le nom de l&#x27;auteur.">
+<meta property="og:image" content="https://yatb.gladi.de/static/img/og.jpg?v=1644ae2b30">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0b1220">
+<link rel="icon" href="/static/img/favicon-32.png?v=c453f22671" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png?v=25adda10a1">
+<link rel="stylesheet" href="/static/style.css?v=4737b925e3">
+</head>
+<body>
+<header class="top">
+<div class="wrap bar">
+<a class="brand" href="/fr/"><img src="/static/img/mark-96.webp?v=5b8ef5cfa5" width="40" height="40" alt=""><span>YATB</span></a>
+<input type="checkbox" id="menu-toggle" class="menu-toggle">
+<label for="menu-toggle" class="menu-button">Menu</label>
+<nav class="nav" aria-label="Menu"><ul><li><a href="/fr/members" aria-current="page">Pour les membres</a></li><li><a href="/fr/admins">Pour les administrateurs</a></li><li><a href="/fr/keys">Clés API</a></li></ul></nav>
+<details class="langs"><summary aria-label="Langue"><span aria-hidden="true">🌐</span> FR</summary><ul><li><a href="/en/members" hreflang="en" lang="en">English</a></li><li><a href="/de/members" hreflang="de" lang="de">Deutsch</a></li><li><a href="/fr/members" hreflang="fr" lang="fr" aria-current="true">Français</a></li><li><a href="/es/members" hreflang="es" lang="es">Español</a></li><li><a href="/it/members" hreflang="it" lang="it">Italiano</a></li><li><a href="/ru/members" hreflang="ru" lang="ru">Русский</a></li><li><a href="/nl/members" hreflang="nl" lang="nl">Nederlands</a></li></ul></details>
+</div>
+</header>
+<main class="wrap">
+
+<h1>Pour les membres</h1>
+<p class="lead">Certains canaux de ton serveur sont liés par YATB. Voici ce que cela signifie pour toi.</p>
+<section><h2>Comment ça marche</h2><ul><li>Écris dans ta langue dans un canal lié. YATB publie une traduction dans les autres canaux liés, sous ton nom et ton avatar.</li><li>Les réponses, modifications, suppressions et fils de discussion sont répliqués. Les réactions aussi : elles apparaissent dans les autres canaux en tant que réaction de YATB.</li><li>La mise en forme, les émojis, les mentions et les liens sont conservés.</li><li>La traduction apparaît dans les autres canaux - les personnes qui ne peuvent pas voir ton canal peuvent tout de même la lire là-bas.</li></ul></section>
+<section><h2>L'étiquette après le nom</h2><p>Chaque traduction indique quel service l'a effectuée :</p><table class="tags"><tbody><tr><td><code>[AI]</code></td><td>Fournisseur d'IA (par exemple Mistral ou Google Gemini) - généralement la meilleure qualité</td></tr><tr><td><code>[Google]</code></td><td>Google Translate</td></tr><tr><td><code>[Azure]</code></td><td>Azure Translator (Microsoft)</td></tr><tr><td><code>[Libre]</code></td><td>LibreTranslate - hébergé sur notre propre serveur</td></tr><tr><td><code>[Raw]</code></td><td>Non traduit - aucun service n'était disponible à ce moment-là</td></tr></tbody></table></section>
+<section><h2>Tes données</h2><ul><li>YATB ne <strong>stocke pas le texte des messages</strong>. Il mémorise uniquement quel message correspond à quelle traduction, pendant 7 jours, afin que les modifications et les suppressions puissent être répercutées.</li><li>Pour traduire, ton message est envoyé aux services de traduction choisis par les administrateurs de ton serveur (voir <a href="privacy">confidentialité</a>).</li><li>Les fournisseurs d'IA reçoivent également jusqu'à 4 messages précédents de la même conversation en guise de contexte, afin que les réponses courtes soient traduites correctement.</li></ul></section>
+<section class="note"><h2>Ton choix : <code>/yatb-user privacy</code></h2><ul><li><strong>Standard</strong> - meilleure qualité. Tes messages peuvent être envoyés aux services ajoutés par les administrateurs.</li><li><strong>Local uniquement</strong> - tes messages sont traduits uniquement par LibreTranslate sur notre propre serveur et ne sont jamais envoyés aux fournisseurs d'IA, Google ou Azure - même pas en tant que contexte pour les traductions des autres. La qualité est moindre.</li></ul><p>Ce paramètre n'est visible que par toi et s'applique sur chaque serveur utilisant YATB. <code>/yatb-user help</code> affiche un court résumé dans Discord.</p></section>
+<section><h2>Questions</h2><details><summary>La traduction est incorrecte. Que puis-je faire ?</summary><p>Modifie ton message - la traduction sera mise à jour automatiquement. Si un terme est toujours mal traduit, signale-le aux administrateurs de ton serveur.</p></details><details><summary>Puis-je désactiver complètement la traduction ?</summary><p>Les messages dans les canaux liés sont toujours traduits, afin que tout le monde puisse suivre la conversation. Avec <em>Local uniquement</em>, ils restent sur notre propre serveur. Les canaux non liés ne sont jamais touchés.</p></details><details><summary>YATB lit-il mes messages privés ou d'autres canaux ?</summary><p>Non. YATB traite uniquement les messages dans les canaux que les administrateurs ont reliés à un Bridge.</p></details></section>
+</main>
+<footer class="foot">
+<div class="wrap">
+<p class="foot-links"><a href="/fr/privacy">Confidentialité</a> · <a href="/fr/terms">Conditions d'utilisation</a></p>
+<a class="kofi" href="https://ko-fi.com/letsgo2u" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">☕</span> Soutiens YATB sur Ko-fi</a>
+<p class="muted">YATB est un projet privé à but non lucratif et n'est pas affilié à Discord.</p>
+</div>
+</footer>
+</body>
+</html>

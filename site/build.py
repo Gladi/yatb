@@ -140,6 +140,8 @@ class Page:
         foot = [f'<a href="{self.url("privacy")}">{t("nav_privacy")}</a>', f'<a href="{self.url("terms")}">{t("nav_terms")}</a>']
         if self.s.get("imprint_html"):
             foot.append(f'<a href="{self.url("imprint")}">{t("nav_imprint")}</a>')
+        if self.s.get("source"):   # Markenname, in allen Sprachen gleich
+            foot.append(f'<a href="{html.escape(self.s["source"])}" target="_blank" rel="noopener noreferrer">GitHub</a>')
         kofi = (f'<a class="kofi" href="https://ko-fi.com/{html.escape(self.s["kofi"])}" target="_blank" rel="noopener noreferrer">'
                 f'<span aria-hidden="true">☕</span> {t("kofi")}</a>') if self.s.get("kofi") else ""
         return f"""<!doctype html>

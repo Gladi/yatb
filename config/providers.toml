@@ -14,6 +14,8 @@
 #   eea_free_allowed     false = Gratis-Stufe ist für Nutzer im EWR nicht zulässig (Warnung beim Hinterlegen)
 #   price_in, price_out  Preis je 1 Mio. Tokens (KI)       | price_chars  Preis je 1 Mio. Zeichen (Google, Azure)
 #   price_cached         Preis je 1 Mio. Tokens aus dem Prompt-Cache des Anbieters (fehlt = wie price_in)
+#   fallback_model       stärkeres Modell desselben Anbieters für einen zweiten Versuch, wenn die Prüfung die Antwort
+#                        verwirft; fallback_price_in / _out / _cached = seine Preise (gleiche Einheit wie oben)
 #   currency             Listenwährung der Preise (= Standardwährung neuer Keys). Jeder Key hat seine eigene
 #                        Abrechnungswährung (USD/EUR, im Formular wählbar); weicht sie ab, wird 1:1 umgerechnet -
 #                        bewusst grob (Fehler ~ Wechselkurs), USD->EUR eher zu teuer, das Budget greift also früher.
@@ -71,6 +73,12 @@ price_in = 0.1275
 price_cached = 0.01275
 price_out = 0.51
 currency = "EUR"
+# Zweiter Versuch mit Medium 3.5, wenn die Prüfung die Antwort von Small verwirft (v. a. verlorene Formatierung);
+# trifft nur wenige Nachrichten. Preise wie oben aus der Konsole (EUR je 1M Tokens).
+fallback_model = "mistral-medium-3-5"
+fallback_price_in = 1.275
+fallback_price_cached = 0.1275
+fallback_price_out = 6.375
 privacy_free = "Mistral free (Experiment) plan: content may be used for training unless you opt out in the Mistral console."
 privacy_paid = "Mistral: no training on your content unless a product setting allows it - switch off the use of API data for improvement in the Mistral console under Privacy. A DPA is available; zero data retention can be requested."
 

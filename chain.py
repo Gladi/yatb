@@ -13,6 +13,7 @@ Verbrauch (limits.py) und Statistik (stats.py) werden hier verbucht. Was der Bot
 abgelehnter Key, Modell nicht gefunden), steht in TranslationResult.notices.
 """
 import asyncio
+import dataclasses
 import datetime
 import logging
 import os
@@ -234,6 +235,16 @@ def retry_hint(reasons) -> str:
             "translated words, no line is added or dropped.")
 
 
+def _fallback_spec(spec: Spec) -> Optional[Spec]:
+    """Ersatzmodell desselben Anbieters (gleicher Key) für einen zweiten Versuch, z. B. Mistral Medium nach Small."""
+    p = spec.provider
+    if spec.kind != "ai" or p is None or not p.fallback_model:
+        return None
+    return Spec("ai", dataclasses.replace(p, model=p.fallback_model, price_in=p.fallback_price_in,
+                                          price_out=p.fallback_price_out, price_cached=p.fallback_price_cached),
+                spec.key)
+
+
 def _est_tokens(text: str) -> int:
     return max(1, len(text) // 3)
 
@@ -265,27 +276,34 @@ async def _run_ai(session, guild_id: int, spec: Spec, segments: Sequence[str], p
         breaker(spec).success()
         text, ok = markup.restore(markup.repair_structure(prep.masked, out, prep)[0], prep)
         reasons = ([] if ok else ["placeholders"]) + validator.problems(segments[i], text, ai=True, target=target)
-        retry = bool(reasons) and set(reasons) <= RETRY_REASONS and deadline - time.monotonic() > 5
+        # Zweiter Versuch, bevor die nächste Stufe dran ist: mit dem stärkeren Ersatzmodell des Anbieters (jede
+        # Ablehnung), sonst mit demselben Modell, wenn nur Formatierung verloren ging - jeweils mit Hinweis dazu.
+        fb = _fallback_spec(spec) if reasons else None
+        second = fb or (spec if reasons and set(reasons) <= RETRY_REASONS else None)
+        if second is not None and deadline - time.monotonic() <= 5:
+            second = None
+        label = "fallback" if second is fb and fb is not None else "retry"
         _record_stat(guild_id, spec, call, source, target, "validator_rejected" if reasons else "ok",
-                     bool(reasons) and not retry, ",".join(reasons) + (";retry" if retry else ""))
-        if retry:  # nur Formatierung verloren: einmal mit konkretem Hinweis nachfragen, bevor die nächste Stufe dran ist
-            if not await _limit_ok(guild_id, spec, est, result.notices):
+                     bool(reasons) and second is None, ",".join(reasons) + (f";{label}" if second else ""))
+        if second is not None:
+            hint = retry_hint(reasons) if set(reasons) & RETRY_REASONS else None
+            if not await _limit_ok(guild_id, second, est, result.notices):
                 return False
             async with sem:
                 timeout = max(2.0, min(tr.AI_TIMEOUT, deadline - time.monotonic()))
-                out, call = await tr.ai_translate(session, spec.provider, spec.key.secret, prep.masked, source, target,
-                                                  context, timeout, hint=retry_hint(reasons))
-            await _account(spec, limits.Usage(requests=1, tokens_in=call.tokens_in, tokens_out=call.tokens_out,
-                                             tokens_cached=call.tokens_cached),
+                out, call = await tr.ai_translate(session, second.provider, spec.key.secret, prep.masked, source,
+                                                  target, context, timeout, hint=hint)
+            await _account(second, limits.Usage(requests=1, tokens_in=call.tokens_in, tokens_out=call.tokens_out,
+                                                tokens_cached=call.tokens_cached),
                            result.notices)
             if out is None:
-                _on_failure(spec, call, result.notices)
-                _record_stat(guild_id, spec, call, source, target, call.outcome, True, "retry")
+                _on_failure(second, call, result.notices)
+                _record_stat(guild_id, second, call, source, target, call.outcome, True, label)
                 return False
             text, ok = markup.restore(markup.repair_structure(prep.masked, out, prep)[0], prep)
             reasons = ([] if ok else ["placeholders"]) + validator.problems(segments[i], text, ai=True, target=target)
-            _record_stat(guild_id, spec, call, source, target, "validator_rejected" if reasons else "ok",
-                         bool(reasons), "retry:" + ",".join(reasons) if reasons else "retry")
+            _record_stat(guild_id, second, call, source, target, "validator_rejected" if reasons else "ok",
+                         bool(reasons), f"{label}:" + ",".join(reasons) if reasons else label)
         if reasons:
             return False
         result.texts[i], result.engines[i] = text, spec.tag

@@ -180,6 +180,7 @@ class ChainTests(unittest.TestCase):
 
         async def ai(session, provider, key, text, source, target, context=None, timeout=None, hint=None):
             self.calls.append(provider.id)
+            self.models.append(provider.model)
             self.hints.append(hint)
             behaviour = self.ai_behaviour.get(provider.id, "ok")
             if behaviour == "broken_once":
@@ -206,6 +207,7 @@ class ChainTests(unittest.TestCase):
 
         self.ai_behaviour = {}
         self.hints = []
+        self.models = []
         tr.ai_translate, tr.google_translate, tr.azure_translate, tr.libre_translate = ai, google, azure, libre
 
     def tearDown(self):
@@ -276,19 +278,41 @@ class ChainTests(unittest.TestCase):
                          [("validator_rejected", 0, "bold;retry"), ("validator_rejected", 1, "retry:bold")])
         self.assertIn("bold **", self.hints[1])
 
-    def test_formatting_retry_succeeds(self):
+    def test_formatting_fallback_to_stronger_model(self):
         self.add("mistral", "mistral-key-000000000000")
         self.ai_behaviour = {"mistral": "broken_once"}
         res = self.translate()
         self.assertEqual((res.engines, self.calls), (["[AI]"], ["mistral", "mistral"]))
+        mistral = pv.PROVIDERS["mistral"]
+        self.assertEqual(self.models, [mistral.model, mistral.fallback_model])
         self.assertIn("**Hallo**", res.texts[0])
-        self.assertEqual([r[16] for r in stats._pending if r[3] == "mistral"], ["bold;retry", "retry"])
+        rows = [r for r in stats._pending if r[3] == "mistral"]
+        self.assertEqual([(r[4], r[16]) for r in rows],
+                         [(mistral.model, "bold;fallback"), (mistral.fallback_model, "fallback")])
+        self.assertGreater(rows[1][14], rows[0][14] * 5)    # zweiter Versuch zum (höheren) Preis des Ersatzmodells
+        self.assertIn("bold **", self.hints[1])
 
-    def test_no_retry_for_lost_placeholders(self):
+    def test_fallback_for_any_rejection_then_next_stage(self):
         self.add("mistral", "mistral-key-000000000000")
         self.ai_behaviour = {"mistral": "drop_token"}
         res = self.translate()
-        self.assertEqual(self.calls.count("mistral"), 1)
+        self.assertEqual(self.calls.count("mistral"), 2)      # Small, dann Medium - beide verworfen
+        self.assertIsNone(self.hints[1])                    # kein Formatierungshinweis bei verlorenen Platzhaltern
+        self.assertNotEqual(res.engines, ["[AI]"])
+
+    def test_same_model_retry_without_fallback_model(self):
+        self.add("groq", "gsk_groqkey0000000000000000")
+        self.ai_behaviour = {"groq": "broken_once"}
+        res = self.translate()
+        self.assertEqual((res.engines, self.calls), (["[AI]"], ["groq", "groq"]))
+        self.assertEqual(len(set(self.models)), 1)
+        self.assertEqual([r[16] for r in stats._pending if r[3] == "groq"], ["bold;retry", "retry"])
+
+    def test_no_retry_for_lost_placeholders_without_fallback_model(self):
+        self.add("groq", "gsk_groqkey0000000000000000")
+        self.ai_behaviour = {"groq": "drop_token"}
+        res = self.translate()
+        self.assertEqual(self.calls.count("groq"), 1)
         self.assertNotEqual(res.engines, ["[AI]"])
 
     def test_auth_error_trips_breaker_and_notifies(self):

@@ -81,12 +81,24 @@ class EngineTests(unittest.TestCase):
         self.assertEqual(len(req["messages"]), 2 + 2 * len(tr.AI_EXAMPLES))
         self.assertIn("FORM OF ADDRESS", req["messages"][0]["content"])
 
+    def test_ai_cached_tokens_are_read(self):
+        async def go():
+            import aiohttp
+            body = completion("Hallo")
+            body["usage"]["prompt_tokens_details"] = {"cached_tokens": 64}
+            async with FakeServer() as srv, aiohttp.ClientSession() as s:
+                srv.responses = [(200, body, {})]
+                return await tr.ai_translate(s, ai_provider(srv.url), "k", "Hello", "en", "de")
+        out, call = run(go())
+        self.assertEqual((out, call.tokens_in, call.tokens_cached), ("Hallo", 120, 64))
+
     def test_ai_error_classes(self):
         cases = [
             ((429, {"error": "Rate limit reached: tokens per day exceeded"}, {}), "quota", None),
             ((429, {"error": "too many requests per minute"}, {"Retry-After": "7"}), "rate_limited", 7.0),
             ((404, {"error": "The model m1 does not exist"}, {}), "model_not_found", None),
             ((401, {"error": "bad key"}, {}), "auth", None),
+            ((402, {"message": "Workspace monthly spending limit reached."}, {}), "spend_limit", None),
             ((503, {"error": "overloaded"}, {}), "server_error", None),
             ((200, completion(""), {}), "empty", None),
             ((200, completion("Hallo", finish="length"), {}), "validator_rejected", None),

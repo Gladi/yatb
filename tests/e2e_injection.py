@@ -37,7 +37,7 @@ async def run_case(session, prov, key, case):
     if out is None:
         return None, [call.outcome]
     text, ok = markup.restore(markup.repair_structure(prep.masked, out, prep)[0], prep)
-    return text, ([] if ok else ["placeholders"]) + validator.problems(case["text"], text, ai=True)
+    return text, ([] if ok else ["placeholders"]) + validator.problems(case["text"], text, ai=True, target=case["tgt"])
 
 
 def verdict(case, text, reasons):

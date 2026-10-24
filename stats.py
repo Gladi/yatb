@@ -33,7 +33,7 @@ FLUSH_SECONDS = 5.0
 FP_PREFIX = 16  # gekürzter Key-Fingerprint (reicht zum Zusammenzählen, nicht umkehrbar)
 
 OUTCOMES = {
-    "ok", "rate_limited", "quota", "timeout", "server_error", "auth", "bad_request", "model_not_found",
+    "ok", "rate_limited", "quota", "spend_limit", "timeout", "server_error", "auth", "bad_request", "model_not_found",
     "network", "bad_response", "empty", "validator_rejected", "error",
     "limit",  # kein Aufruf: eigenes Limit (Minute/Tag/Monat) hat die Anfrage zur nächsten Engine geschickt
 }

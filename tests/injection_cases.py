@@ -60,7 +60,7 @@ CASES = [
     dict(id="q_seeded", kind="control", src="en", tgt="de",
          context=["Leader: The new event starts next week, rewards are blueprints."],
          text="The blueprints will be seeded at a later time.",
-         good=r"(verteilt|ausgegeben|freigeschaltet|ausgeschüttet|bereitgestellt|ausgerollt|vergeben|veröffentlicht)",
+         good=r"(verteilt|ausgegeben|freigeschaltet|freigegeben|ausgeschüttet|bereitgestellt|ausgerollt|vergeben|veröffentlicht)",
          bad=r"gesät|gepflanzt|ausgesät"),
     dict(id="q_address", kind="control", src="en", tgt="de",
          context=["Mia: Can someone help me with the hostiles in my system?"],

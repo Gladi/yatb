@@ -60,6 +60,7 @@ class Provider:
     eea_free_allowed: bool = True
     price_in: float = 0.0             # je 1 Mio. Tokens
     price_out: float = 0.0
+    price_cached: Optional[float] = None  # je 1 Mio. Tokens aus dem Prompt-Cache des Anbieters (None = wie price_in)
     price_chars: float = 0.0          # je 1 Mio. Zeichen
     currency: str = "USD"
     privacy_free: str = ""
@@ -77,8 +78,11 @@ class Provider:
     def privacy(self, tier: str) -> str:
         return self.privacy_paid if tier == "paid" else self.privacy_free
 
-    def cost(self, tokens_in: int = 0, tokens_out: int = 0, chars: int = 0) -> float:
-        return (tokens_in * self.price_in + tokens_out * self.price_out + chars * self.price_chars) / 1_000_000
+    def cost(self, tokens_in: int = 0, tokens_out: int = 0, chars: int = 0, tokens_cached: int = 0) -> float:
+        cached = min(max(tokens_cached, 0), tokens_in)   # gecachte Tokens sind Teil von tokens_in
+        p_cached = self.price_in if self.price_cached is None else self.price_cached
+        return ((tokens_in - cached) * self.price_in + cached * p_cached + tokens_out * self.price_out
+                + chars * self.price_chars) / 1_000_000
 
 
 # Rückfall, falls die Konfigurationsdatei fehlt oder diese Einträge fehlerhaft sind
@@ -92,7 +96,7 @@ BUILTIN: Dict[str, Provider] = {p.id: p for p in (
 _ID_RE = re.compile(r"^[a-z0-9_]{2,32}$")
 _FIELDS = {
     "name", "kind", "group", "enabled", "base_url", "model", "verify_url", "extra", "free_available",
-    "eea_free_allowed", "price_in", "price_out", "price_chars", "currency", "privacy_free", "privacy_paid", "limits",
+    "eea_free_allowed", "price_in", "price_out", "price_cached", "price_chars", "currency", "privacy_free", "privacy_paid", "limits",
 }
 
 
@@ -152,7 +156,7 @@ def _parse_provider(pid: str, raw: Any) -> Tuple[Optional[Provider], List[str]]:
             errors.append(f"{pid}.{key}: muss true oder false sein")
     if "extra" in raw and not isinstance(raw["extra"], dict):
         errors.append(f"{pid}.extra: muss eine Tabelle sein")
-    prices = {k: _num(raw[k], float, f"{pid}.{k}", errors) for k in ("price_in", "price_out", "price_chars") if k in raw}
+    prices = {k: _num(raw[k], float, f"{pid}.{k}", errors) for k in ("price_in", "price_out", "price_cached", "price_chars") if k in raw}
     limits = raw.get("limits") or {}
     if not isinstance(limits, dict) or set(limits) - set(TIERS):
         errors.append(f"{pid}.limits: nur [limits.free] und [limits.paid] erlaubt")
@@ -167,6 +171,7 @@ def _parse_provider(pid: str, raw: Any) -> Tuple[Optional[Provider], List[str]]:
         verify_url=raw.get("verify_url"), extra=dict(raw.get("extra") or {}),
         free_available=raw.get("free_available", True), eea_free_allowed=raw.get("eea_free_allowed", True),
         price_in=prices.get("price_in") or 0.0, price_out=prices.get("price_out") or 0.0,
+        price_cached=prices.get("price_cached"),
         price_chars=prices.get("price_chars") or 0.0, currency=str(raw.get("currency", "USD")),
         privacy_free=str(raw.get("privacy_free", "")), privacy_paid=str(raw.get("privacy_paid", "")),
         limits_free=lim_free, limits_paid=lim_paid,

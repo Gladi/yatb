@@ -35,6 +35,7 @@ class Usage:
     tokens_in: int = 0
     tokens_out: int = 0
     chars: int = 0
+    tokens_cached: int = 0            # Teil von tokens_in, vom Anbieter aus dem Prompt-Cache (günstiger)
 
     @property
     def tokens(self) -> int:
@@ -91,7 +92,7 @@ def monthly_limit(provider: Provider, tier: str, budget: Optional[float]) -> Opt
 def cost_of(provider: Provider, tier: str, usage: Usage) -> float:
     if tier != "paid":
         return 0.0
-    return provider.cost(usage.tokens_in, usage.tokens_out, usage.chars)
+    return provider.cost(usage.tokens_in, usage.tokens_out, usage.chars, usage.tokens_cached)
 
 
 async def check(key: db.KeyRuntime, provider: Provider, est: Usage, now: Optional[datetime.datetime] = None) -> Optional[str]:

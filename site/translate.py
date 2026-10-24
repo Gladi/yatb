@@ -4,9 +4,10 @@ Auch für das Dashboard: --src dashboard/texts/en.py --out dashboard/texts/mt.py
 
 Nur neue oder geänderte englische Texte werden übersetzt (Hash je Text in mt.py). Jede Antwort wird geprüft:
 HTML-Tags, Links, Platzhalter und <code>-Inhalte müssen gleich bleiben, sonst wird der Text verworfen (-> Englisch).
-Key: Umgebungsvariable GOOGLE_AI_KEY (Gemini-Key aus der .env), nur diese eine Variable in den Container geben:
+Key: Umgebungsvariable GOOGLE_AI_KEY (Gemini-Key aus .env.tools), nur diese eine Variable in den Container geben
+(ohne GOOGLE_AI_KEY, aber mit MISTRAL_API_KEY übersetzt Mistral Small):
 
-    docker run --rm -v $PWD/yatb:/src -w /src --env-file <(grep '^GOOGLE_AI_KEY=' .env) \
+    docker run --rm -v $PWD/yatb:/src -w /src --env-file <(grep '^GOOGLE_AI_KEY=' .env.tools) \
       discord-bot-bot python site/translate.py [--all]
 
 Danach: python site/build.py und Tests. Der Key wird nie ausgegeben.
@@ -48,6 +49,7 @@ def _load(path: Path, *names):
 EN = _load(SRC, "TEXTS")[0]
 
 BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai"   # wie config/providers.toml (gemini)
+MISTRAL_URL, MISTRAL_MODEL = "https://api.mistral.ai/v1", "mistral-small-2603"   # Ausweichweg mit MISTRAL_API_KEY
 
 LANGS = {"fr": "French", "es": "Spanish (Spain)", "it": "Italian", "ru": "Russian", "nl": "Dutch"}
 OWN_NAME = {"fr": "français", "es": "español", "it": "italiano", "ru": "русский", "nl": "nederlands"}
@@ -106,10 +108,13 @@ def load_existing():
 
 async def main():
     secret = os.environ.get("GOOGLE_AI_KEY", "").strip()
-    if not secret:
-        sys.exit("GOOGLE_AI_KEY fehlt")
+    base_url = BASE_URL
     model = re.search(r'^model = "([^"]+)"', (SITE.parent / "config" / "providers.toml").read_text(encoding="utf-8")
                       .split("[providers.gemini]")[1], re.M).group(1)
+    if not secret and os.environ.get("MISTRAL_API_KEY", "").strip():   # Ausweichweg, z. B. wenn das Gemini-Limit erreicht ist
+        secret, base_url, model = os.environ["MISTRAL_API_KEY"].strip(), MISTRAL_URL, MISTRAL_MODEL
+    if not secret:
+        sys.exit("GOOGLE_AI_KEY (oder MISTRAL_API_KEY) fehlt")
     old, old_hash = load_existing()
     hashes = {k: source_hash(v) for k, v in EN.items()}
     # Beispielnachricht: in die jeweilige Sprache aus dem englischen Original, Kanalname fest
@@ -127,7 +132,7 @@ async def main():
             payload = {"model": model, "temperature": 0.1, "messages": [
                 {"role": "system", "content": system},
                 {"role": "user", "content": json.dumps(obj, ensure_ascii=False)}]}
-            async with session.post(f"{BASE_URL}/chat/completions", json=payload,
+            async with session.post(f"{base_url}/chat/completions", json=payload,
                                     headers={"Authorization": f"Bearer {secret}"},
                                     timeout=aiohttp.ClientTimeout(total=240)) as resp:
                 body = await resp.json(content_type=None)

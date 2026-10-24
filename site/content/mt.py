@@ -200,8 +200,9 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'pd_text_how_long': 'No se almacena. Se mantiene en memoria solo durante la traducción; el contexto de los '
                             'mensajes recientes se pierde en cada reinicio.',
         'pd_text_what': 'Texto del mensaje y nombre de usuario',
-        'pd_text_why': 'Traducción; enviado a los servicios de traducción del servidor (ver 4). Los proveedores de IA '
-                       'también reciben hasta {context_lines} mensajes anteriores de la conversación como contexto.',
+        'pd_text_why': 'Traducción; enviada a los servicios de traducción del servidor (consulta el apartado 4). Los '
+                       'proveedores de IA también reciben hasta {context_lines} de tus propios mensajes anteriores en '
+                       'el mismo Bridge como contexto, nunca los mensajes de otras personas.',
         'privacy_basis': 'Art. 6(1)(f) del RGPD: nuestro interés legítimo, y el interés de las comunidades de los '
                          'servidores, en la comunicación multilingüe y en un servicio seguro y fiable. Tu elección de '
                          '<em>Solo local</em> limita el procesamiento a nuestro propio servidor.',
@@ -525,9 +526,9 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'pd_text_how_long': 'Non stocké. Conservé en mémoire uniquement pendant la traduction ; le contexte des '
                             'messages récents est perdu à chaque redémarrage.',
         'pd_text_what': "Texte du message et nom d'affichage",
-        'pd_text_why': "Traduction ; envoyé aux services de traduction du serveur (voir 4). Les fournisseurs d'IA "
-                       "reçoivent également jusqu'à {context_lines} messages précédents de la conversation comme "
-                       'contexte.',
+        'pd_text_why': "Traduction ; envoyée aux services de traduction du serveur (voir 4). Les fournisseurs d'IA "
+                       "reçoivent jusqu'à {context_lines} de tes propres messages précédents dans le même Bridge en "
+                       'guise de contexte — jamais ceux des autres.',
         'privacy_basis': 'Art. 6(1)(f) du RGPD - notre intérêt légitime, ainsi que celui des communautés de serveurs, '
                          'à une communication multilingue et à un service sécurisé et fiable. Ton choix de <em>Local '
                          'uniquement</em> limite le traitement à notre propre serveur.',
@@ -848,8 +849,9 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'pd_text_how_long': 'Non memorizzato. Mantenuto in memoria solo durante la traduzione; il contesto dei '
                             'messaggi recenti viene perso a ogni riavvio.',
         'pd_text_what': 'Testo del messaggio e nome visualizzato',
-        'pd_text_why': 'Traduzione; inviato ai servizi di traduzione del server (vedi 4). I provider IA ricevono anche '
-                       'fino a {context_lines} messaggi precedenti della conversazione come contesto.',
+        'pd_text_why': 'Traduzione; inviata ai servizi di traduzione del server (vedi 4). I fornitori di IA ricevono '
+                       'fino a {context_lines} dei tuoi stessi messaggi precedenti nello stesso Bridge come contesto — '
+                       'mai quelli di altre persone.',
         'privacy_basis': "Art. 6(1)(f) GDPR - il nostro legittimo interesse, e l'interesse delle community dei server, "
                          'a una comunicazione multilingue e a un servizio sicuro e affidabile. La tua scelta di '
                          "<em>Solo locale</em> limita l'elaborazione al nostro server.",
@@ -1169,8 +1171,9 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'pd_text_how_long': 'Niet opgeslagen. Alleen in het geheugen gehouden tijdens het vertalen; de context van '
                             'recente berichten gaat bij elke herstart verloren.',
         'pd_text_what': 'Berichttekst en weergavenaam',
-        'pd_text_why': 'Vertaling; verzonden naar de vertaaldiensten van de server (zie 4). AI-aanbieders ontvangen '
-                       'ook maximaal {context_lines} eerdere berichten uit het gesprek als context.',
+        'pd_text_why': 'Vertaling; wordt naar de vertaalservices van de server gestuurd (zie 4). AI-aanbieders krijgen '
+                       'tot {context_lines} van jouw eigen eerdere berichten in dezelfde Bridge als context – nooit '
+                       'berichten van anderen.',
         'privacy_basis': 'Art. 6 lid 1 sub f AVG - ons gerechtvaardigd belang, en het belang van de '
                          'servergemeenschappen, bij meertalige communicatie en bij een veilige, betrouwbare dienst. '
                          'Jouw keuze voor <em>Alleen lokaal</em> beperkt de verwerking tot onze eigen server.',
@@ -1485,8 +1488,9 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'pd_text_how_long': 'Не сохраняется. Хранится в памяти только во время перевода; контекст недавних сообщений '
                             'теряется при каждом перезапуске.',
         'pd_text_what': 'Текст сообщения и отображаемое имя',
-        'pd_text_why': 'Перевод; отправляется в службы перевода сервера (см. 4). ИИ-провайдеры также получают до '
-                       '{context_lines} предыдущих сообщений беседы в качестве контекста.',
+        'pd_text_why': 'Перевод; отправляется на серверные переводческие службы (см. п. 4). Провайдеры ИИ также '
+                       'получают до {context_lines} твоих предыдущих сообщений в том же Bridge в качестве контекста — '
+                       'никогда чужие сообщения.',
         'privacy_basis': 'Ст. 6(1)(f) GDPR — наш законный интерес, а также интерес серверных сообществ в многоязычном '
                          'общении и в безопасном, надежном сервисе. Твой выбор <em>Только локально</em> ограничивает '
                          'обработку нашим собственным сервером.',
@@ -1726,7 +1730,7 @@ SOURCE_HASH = {'admins_chain_intro': '1a810dee3646',
  'pd_stats_why': 'b98c0e493bdf',
  'pd_text_how_long': 'e1279ce78a24',
  'pd_text_what': 'f9840ee8bef5',
- 'pd_text_why': '7065610b480c',
+ 'pd_text_why': '9693a7292479',
  'privacy_basis': 'c5e11aae1082',
  'privacy_basis_title': '2848edf5fd3c',
  'privacy_bot_intro': '21e73e8ed224',

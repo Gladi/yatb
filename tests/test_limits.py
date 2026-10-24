@@ -106,6 +106,31 @@ class ConfigTests(unittest.TestCase):
 
 
 # ---------------------------------------------------------------------------
+class CachedPriceTests(unittest.TestCase):
+    def test_cached_tokens_use_cached_price(self):
+        p = pv.Provider("x", "X", "openai", price_in=1.0, price_cached=0.1, price_out=2.0)
+        self.assertAlmostEqual(p.cost(tokens_in=1000, tokens_out=100), (1000 * 1.0 + 100 * 2.0) / 1e6)
+        self.assertAlmostEqual(p.cost(tokens_in=1000, tokens_out=100, tokens_cached=600),
+                               (400 * 1.0 + 600 * 0.1 + 100 * 2.0) / 1e6)
+        self.assertAlmostEqual(p.cost(tokens_in=100, tokens_cached=500), 100 * 0.1 / 1e6)   # nie mehr als tokens_in
+
+    def test_without_cached_price_cached_tokens_cost_full(self):
+        p = pv.Provider("x", "X", "openai", price_in=1.0, price_out=2.0)
+        self.assertAlmostEqual(p.cost(tokens_in=1000, tokens_cached=600), 1000 * 1.0 / 1e6)
+
+    def test_usage_passes_cached_tokens(self):
+        p = pv.Provider("x", "X", "openai", price_in=1.0, price_cached=0.1)
+        self.assertAlmostEqual(limits.cost_of(p, "paid", limits.Usage(tokens_in=1000, tokens_cached=1000)), 0.0001)
+        self.assertEqual(limits.cost_of(p, "free", limits.Usage(tokens_in=1000, tokens_cached=1000)), 0.0)
+
+    def test_config_reads_price_cached(self):
+        provs, errors = pv.parse_config({"providers": {"mistral": {"name": "M", "kind": "openai", "group": "B",
+                                         "base_url": "https://x", "model": "m", "price_in": 0.1275,
+                                         "price_cached": 0.01275, "price_out": 0.51, "currency": "EUR"}}})
+        self.assertEqual(errors, [])
+        self.assertEqual((provs["mistral"].price_cached, provs["mistral"].currency), (0.01275, "EUR"))
+
+
 class LimitTests(unittest.TestCase):
     def setUp(self):
         limits.reset_window()

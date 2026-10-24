@@ -154,7 +154,7 @@ TEXTS = {
     "privacy_col_why": "Purpose",
     "privacy_col_how_long": "Kept for",
     "pd_text_what": "Message text and display name",
-    "pd_text_why": "Translation; sent to the translation services of the server (see 4). AI providers also get up to {context_lines} previous messages of the conversation as context.",
+    "pd_text_why": "Translation; sent to the translation services of the server (see 4). AI providers also get up to {context_lines} of your own previous messages in the same bridge as context - never other people's messages.",
     "pd_text_how_long": "Not stored. Held in memory only while translating; the context of recent messages is lost on every restart.",
     "pd_map_what": "Message IDs and a checksum of the text",
     "pd_map_why": "Mirroring replies, edits and deletes to the translations",

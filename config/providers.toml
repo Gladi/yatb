@@ -13,6 +13,7 @@
 #   free_available       false = Anbieter hat keine Gratis-Stufe (Key gilt immer als "paid")
 #   eea_free_allowed     false = Gratis-Stufe ist für Nutzer im EWR nicht zulässig (Warnung beim Hinterlegen)
 #   price_in, price_out  Preis je 1 Mio. Tokens (KI)       | price_chars  Preis je 1 Mio. Zeichen (Google, Azure)
+#   price_cached         Preis je 1 Mio. Tokens aus dem Prompt-Cache des Anbieters (fehlt = wie price_in)
 #   currency             Listenwährung der Preise (= Standardwährung neuer Keys). Jeder Key hat seine eigene
 #                        Abrechnungswährung (USD/EUR, im Formular wählbar); weicht sie ab, wird 1:1 umgerechnet -
 #                        bewusst grob (Fehler ~ Wechselkurs), USD->EUR eher zu teuer, das Budget greift also früher.
@@ -56,16 +57,20 @@ kind = "openai"
 group = "B"
 enabled = true
 base_url = "https://api.mistral.ai/v1"
-model = "mistral-medium-3-5"
-# Prompt-Caching: gleicher Schlüssel = gleicher Prompt-Anfang (System + Beispiele) -> wiederholte Tokens kosten 10 %
+# Mistral Small 4 statt Medium 3.5 (seit 24.10.2026): im Blindvergleich an 80 echten Nachrichten gleich gut
+# (23:21 bei 15 gleich), ca. 11x günstiger. Cache-Treffer bei Small zuverlässig, bei Medium/Large nur gelegentlich.
+model = "mistral-small-2603"
+# Prompt-Caching: gleicher Schlüssel = gleicher Prompt-Anfang (System-Prompt) -> wiederholte Tokens kosten 10 %
 # (docs.mistral.ai, Prompt caching, 22.10.2026). Kein Geheimnis, nur eine Bezeichnung; bei neuem Prompt hochzählen.
 extra = { prompt_cache_key = "yatb-translate-v2" }
 free_available = true
 eea_free_allowed = true
-# docs.mistral.ai/inference/pricing (19.10.2026): $1.5 Input, $7.5 Output je 1M Tokens.
-price_in = 1.5
-price_out = 7.5
-currency = "USD"
+# Preisliste Mistral-Konsole (24.10.2026, EUR je 1M Tokens): Small 4 0,1275 Input, 0,01275 gecacht, 0,51 Output.
+# (Medium 3.5 wäre 1,275 / 0,1275 / 6,375.)
+price_in = 0.1275
+price_cached = 0.01275
+price_out = 0.51
+currency = "EUR"
 privacy_free = "Mistral free (Experiment) plan: content may be used for training unless you opt out in the Mistral console."
 privacy_paid = "Mistral: no training on your content unless a product setting allows it - switch off the use of API data for improvement in the Mistral console under Privacy. A DPA is available; zero data retention can be requested."
 

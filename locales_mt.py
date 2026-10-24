@@ -5,6 +5,7 @@ Erzeugt am 2026-10-20 (Niederländisch: später am selben Tag) aus locales.py (E
 Betreibers. Platzhalter und Befehle in Backticks wurden automatisch geprüft. NICHT von Muttersprachlern geprüft -
 Korrekturen bitte direkt hier eintragen und die Zeile mit "# geprüft" markieren. Fehlende Texte fallen auf Englisch zurück.
 Neu erzeugen: siehe Hinweis in locales.py (gleiches Verfahren, nur geänderte Texte übersetzen).
+"provider_spend_limit" am 2026-10-24 mit Mistral Small (mistral-small-2603) übersetzt (Gemini-Limit erreicht).
 """
 
 MESSAGES_MT = {'es': {'bad_bridge': 'Por favor, introduce un nombre de Bridge.',
@@ -187,6 +188,7 @@ MESSAGES_MT = {'es': {'bad_bridge': 'Por favor, introduce un nombre de Bridge.',
         'privacy_state_local': 'Ajuste actual: **Solo local**.',
         'privacy_state_standard': 'Ajuste actual: **Estándar**.',
         'privacy_title': '🔒 Tu privacidad en las traducciones',
+        'provider_spend_limit': '⚠️ {provider} informa que se ha agotado el límite de gasto mensual o el crédito de la cuenta de la clave. La clave está pausada y se reintenta cada hora; las traducciones usan el siguiente motor. Aumenta el límite en la consola de {provider}.',
         'provider_quota': '⚠️ {provider} informa que la cuota de la clave de este servidor se ha agotado. La clave '
                           'está pausada hasta las 00:00 UTC; las traducciones usarán el siguiente motor.',
         'rep_added': '➕ **Bridge:** {user} añadió {channel} a `{bridge}` ({lang}).',
@@ -423,6 +425,7 @@ MESSAGES_MT = {'es': {'bad_bridge': 'Por favor, introduce un nombre de Bridge.',
         'privacy_state_local': 'Paramètre actuel : **Local only**.',
         'privacy_state_standard': 'Paramètre actuel : **Standard**.',
         'privacy_title': '🔒 Confidentialité de tes traductions',
+        'provider_spend_limit': '⚠️ {provider} signale que la limite de dépenses mensuelle ou le crédit du compte de la clé est épuisé. La clé est en pause et réessayée toutes les heures ; les traductions utilisent le moteur suivant. Augmente la limite dans la console {provider}.',
         'provider_quota': '⚠️ {provider} signale que le quota de la clé de ce serveur est épuisé. La clé est suspendue '
                           "jusqu'à 00:00 UTC ; les traductions utilisent le moteur suivant.",
         'rep_added': '➕ **Bridge :** {user} a ajouté {channel} à `{bridge}` ({lang}).',
@@ -653,6 +656,7 @@ MESSAGES_MT = {'es': {'bad_bridge': 'Por favor, introduce un nombre de Bridge.',
         'privacy_state_local': 'Impostazione attuale: **Solo locale**.',
         'privacy_state_standard': 'Impostazione attuale: **Standard**.',
         'privacy_title': '🔒 La tua privacy nelle traduzioni',
+        'provider_spend_limit': "⚠️ {provider} segnala che il limite di spesa mensile o il credito dell'account della chiave è esaurito. La chiave è in pausa e viene ritentata ogni ora; le traduzioni usano il motore successivo. Alza il limite nella console di {provider}.",
         'provider_quota': '⚠️ {provider} segnala che la quota della chiave di questo server è esaurita. La chiave è in '
                           'pausa fino alle 00:00 UTC; le traduzioni useranno il motore successivo.',
         'rep_added': '➕ **Bridge:** {user} ha aggiunto {channel} a `{bridge}` ({lang}).',
@@ -887,6 +891,7 @@ MESSAGES_MT = {'es': {'bad_bridge': 'Por favor, introduce un nombre de Bridge.',
         'privacy_state_local': 'Huidige instelling: **Alleen lokaal**.',
         'privacy_state_standard': 'Huidige instelling: **Standaard**.',
         'privacy_title': '🔒 Jouw vertaalprivacy',
+        'provider_spend_limit': '⚠️ {provider} meldt dat de maandelijkse uitgavenlimiet of het tegoed van de sleutel van het account op is. De sleutel is gepauzeerd en wordt elk uur opnieuw geprobeerd; vertalingen gebruiken de volgende engine. Verhoog de limiet in de {provider}-console.',
         'provider_quota': '⚠️ {provider} meldt dat het quotum van de sleutel van deze server is verbruikt. De sleutel '
                           'is gepauzeerd tot 00:00 UTC; vertalingen gebruiken de volgende engine.',
         'rep_added': '➕ **Bridge:** {user} heeft {channel} toegevoegd aan `{bridge}` ({lang}).',
@@ -1112,6 +1117,7 @@ MESSAGES_MT = {'es': {'bad_bridge': 'Por favor, introduce un nombre de Bridge.',
         'privacy_state_local': 'Текущая настройка: **Только локально**.',
         'privacy_state_standard': 'Текущая настройка: **Стандартная**.',
         'privacy_title': '🔒 Конфиденциальность твоих переводов',
+        'provider_spend_limit': '⚠️ {provider} сообщает, что месячный лимит расходов или кредит аккаунта ключа исчерпан. Ключ приостановлен и повторяется каждый час; переводы используют следующий движок. Подними лимит в консоли {provider}.',
         'provider_quota': '⚠️ {provider} сообщает, что квота ключа этого сервера исчерпана. Ключ приостановлен до '
                           '00:00 UTC; переводы используют следующий движок.',
         'rep_added': '➕ **Мост:** {user} добавил {channel} в `{bridge}` ({lang}).',

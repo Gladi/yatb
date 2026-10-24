@@ -167,6 +167,9 @@ MESSAGES: Dict[str, Dict[str, str]] = {
                         "next engine is used. Check it with `/yatb keys list` or replace it with `/yatb keys add`.",
         "model_missing": "⚠️ {provider}: the model `{model}` is not available (removed or renamed by the provider). It is "
                          "skipped for 6 hours; the bot operator needs to update the provider configuration.",
+        "provider_spend_limit": "⚠️ {provider} reports that the monthly spending limit or credit of the key's account is "
+                                "used up. The key is paused and retried every hour; translations use the next engine. "
+                                "Raise the limit in the {provider} console.",
         "provider_quota": "⚠️ {provider} reports that the quota of this server's key is used up. The key is paused until "
                           "00:00 UTC; translations use the next engine.",
         # ---- /yatb log, reset, uninstall
@@ -355,6 +358,9 @@ MESSAGES: Dict[str, Dict[str, str]] = {
                         "`/yatb keys add`.",
         "model_missing": "⚠️ {provider}: Das Modell `{model}` ist nicht verfügbar (vom Anbieter entfernt oder umbenannt). Es "
                          "wird 6 Stunden übersprungen; der Betreiber muss die Anbieter-Konfiguration anpassen.",
+        "provider_spend_limit": "⚠️ {provider} meldet, dass das monatliche Ausgabenlimit oder Guthaben des Kontos zu diesem "
+                                "Key aufgebraucht ist. Der Key pausiert und wird stündlich neu versucht; übersetzt wird mit "
+                                "der nächsten Engine. Hebe das Limit in der Konsole von {provider} an.",
         "provider_quota": "⚠️ {provider} meldet, dass das Kontingent des Keys dieses Servers aufgebraucht ist. Der Key "
                           "pausiert bis 00:00 UTC; übersetzt wird mit der nächsten Engine.",
         "report_channel_set": "📢 Log-Kanal auf {channel} gesetzt.",

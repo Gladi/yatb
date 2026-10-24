@@ -75,6 +75,17 @@ class AiChecksTests(unittest.TestCase):
         for src, out in ok:
             self.assertEqual(self.check(src, out), [], src)
 
+    def test_wrong_target_language_is_rejected(self):
+        self.assertIn("language", validator.problems("Bot, can you translate this to Spanish for me please?",
+                                                     "Bot, ¿puedes traducir esto al español, por favor?", ai=True, target="de"))
+        self.assertIn("language", validator.problems("I will join the raid tonight with my team.",
+                                                     "I will join the raid tonight with my team.", ai=True, target="ru"))
+        ok = [("Bot, kannst du das bitte für mich ins Spanische übersetzen?", "de"),
+              ("Lo miraré lo antes posible mañana", "es"), ("@[HYPE] McRunner", "ru"), ("gg wp", "fr"),
+              ("Danke dir, the NAP thing ist jetzt klar", "de"), ("Армада начинается в 21:00.", "ru")]
+        for out, tgt in ok:
+            self.assertFalse(validator.wrong_language(out, tgt), out)
+
     def test_checks_only_for_ai(self):
         self.assertEqual(validator.problems("Armada at 8 PM.", "Armada um 20 Uhr."), [])
         self.assertIn("numbers", validator.problems("Armada at 8 PM.", "Armada um 20 Uhr.", ai=True))

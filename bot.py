@@ -495,6 +495,9 @@ async def handle_notices(guild: discord.Guild, notices: Sequence[chain.Notice]):
         elif n.kind == "model_missing":
             await notify_once(guild, ("model_missing", n.provider.id),
                               tx(loc, "model_missing", provider=n.provider.name, model=n.provider.model or "?"))
+        elif n.kind == "provider_spend_limit":
+            await notify_once(guild, ("provider_spend_limit", n.provider.id),
+                              tx(loc, "provider_spend_limit", provider=n.provider.name))
         elif n.kind == "provider_quota":
             await notify_once(guild, ("provider_quota", n.provider.id), tx(loc, "provider_quota", provider=n.provider.name))
 

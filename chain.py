@@ -43,7 +43,7 @@ MODELS = {"google": "translate-v2", "azure": "translator-v3", "libre": "libretra
 
 @dataclass
 class Notice:
-    kind: str                         # "usage", "key_rejected", "model_missing", "provider_quota"
+    kind: str                         # "usage", "key_rejected", "model_missing", "provider_quota", "provider_spend_limit"
     provider: providers.Provider
     key: Optional[db.KeyRuntime]
     crossed: List[str] = field(default_factory=list)
@@ -135,6 +135,10 @@ def _on_failure(spec: Spec, call: tr.Call, notices: List[Notice]):
         b.trip(6 * 3600)
         if spec.provider:
             notices.append(Notice("model_missing", spec.provider, spec.key))
+    elif oc == "spend_limit":   # Konto-Ausgabenlimit: stündlich neu versuchen (Betreiber hebt es evtl. gleich an)
+        b.trip(3600)
+        if spec.provider:
+            notices.append(Notice("provider_spend_limit", spec.provider, spec.key))
     elif oc == "quota":
         b.trip(_seconds_to_utc_midnight())
         if spec.provider:
@@ -178,7 +182,7 @@ def _record_stat(guild_id: int, spec: Spec, call: tr.Call, source: str, target: 
     if spec.key is not None and spec.provider is not None:
         cost = limits.cost_of(spec.provider, spec.key.tier,
                               limits.Usage(tokens_in=call.tokens_in, tokens_out=call.tokens_out,
-                                           chars=call.chars if spec.kind != "ai" else 0))
+                                           chars=call.chars if spec.kind != "ai" else 0, tokens_cached=call.tokens_cached))
     stats.record(
         guild_id=guild_id, provider=spec.id, model=spec.model, outcome=outcome, src_lang=source, tgt_lang=target,
         chars=call.chars, tokens_in=call.tokens_in, tokens_out=call.tokens_out, duration_ms=call.duration_ms,
@@ -252,14 +256,15 @@ async def _run_ai(session, guild_id: int, spec: Spec, segments: Sequence[str], p
             timeout = max(2.0, min(tr.AI_TIMEOUT, deadline - time.monotonic()))
             out, call = await tr.ai_translate(session, spec.provider, spec.key.secret, prep.masked, source, target,
                                               context, timeout)
-        await _account(spec, limits.Usage(requests=1, tokens_in=call.tokens_in, tokens_out=call.tokens_out), result.notices)
+        await _account(spec, limits.Usage(requests=1, tokens_in=call.tokens_in, tokens_out=call.tokens_out,
+                                             tokens_cached=call.tokens_cached), result.notices)
         if out is None:
             _on_failure(spec, call, result.notices)
             _record_stat(guild_id, spec, call, source, target, call.outcome, True)
             return False
         breaker(spec).success()
         text, ok = markup.restore(markup.repair_structure(prep.masked, out, prep)[0], prep)
-        reasons = ([] if ok else ["placeholders"]) + validator.problems(segments[i], text, ai=True)
+        reasons = ([] if ok else ["placeholders"]) + validator.problems(segments[i], text, ai=True, target=target)
         retry = bool(reasons) and set(reasons) <= RETRY_REASONS and deadline - time.monotonic() > 5
         _record_stat(guild_id, spec, call, source, target, "validator_rejected" if reasons else "ok",
                      bool(reasons) and not retry, ",".join(reasons) + (";retry" if retry else ""))
@@ -270,14 +275,15 @@ async def _run_ai(session, guild_id: int, spec: Spec, segments: Sequence[str], p
                 timeout = max(2.0, min(tr.AI_TIMEOUT, deadline - time.monotonic()))
                 out, call = await tr.ai_translate(session, spec.provider, spec.key.secret, prep.masked, source, target,
                                                   context, timeout, hint=retry_hint(reasons))
-            await _account(spec, limits.Usage(requests=1, tokens_in=call.tokens_in, tokens_out=call.tokens_out),
+            await _account(spec, limits.Usage(requests=1, tokens_in=call.tokens_in, tokens_out=call.tokens_out,
+                                             tokens_cached=call.tokens_cached),
                            result.notices)
             if out is None:
                 _on_failure(spec, call, result.notices)
                 _record_stat(guild_id, spec, call, source, target, call.outcome, True, "retry")
                 return False
             text, ok = markup.restore(markup.repair_structure(prep.masked, out, prep)[0], prep)
-            reasons = ([] if ok else ["placeholders"]) + validator.problems(segments[i], text, ai=True)
+            reasons = ([] if ok else ["placeholders"]) + validator.problems(segments[i], text, ai=True, target=target)
             _record_stat(guild_id, spec, call, source, target, "validator_rejected" if reasons else "ok",
                          bool(reasons), "retry:" + ",".join(reasons) if reasons else "retry")
         if reasons:

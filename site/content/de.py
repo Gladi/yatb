@@ -152,7 +152,7 @@ TEXTS = {
     "privacy_col_why": "Zweck",
     "privacy_col_how_long": "Speicherdauer",
     "pd_text_what": "Nachrichtentext und Anzeigename",
-    "pd_text_why": "Übersetzung; Weitergabe an die Übersetzungsdienste des Servers (siehe 4). KI-Anbieter bekommen außerdem bis zu {context_lines} vorherige Nachrichten des Gesprächs als Kontext.",
+    "pd_text_why": "Übersetzung; Weitergabe an die Übersetzungsdienste des Servers (siehe 4). KI-Anbieter bekommen außerdem bis zu {context_lines} deiner eigenen vorherigen Nachrichten in derselben Bridge als Kontext, nie Nachrichten anderer.",
     "pd_text_how_long": "Keine Speicherung. Nur während der Übersetzung im Arbeitsspeicher; der Kontext der letzten Nachrichten geht bei jedem Neustart verloren.",
     "pd_map_what": "Nachrichten-IDs und eine Prüfsumme des Textes",
     "pd_map_why": "Antworten, Bearbeitungen und Löschungen in die Übersetzungen übernehmen",

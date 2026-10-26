@@ -15,6 +15,7 @@ TEXTS = {
     "nav_privacy": "Datenschutz",
     "nav_terms": "Bedingungen",
     "nav_imprint": "Impressum",
+    "nav_more": "Weitere Projekte von Gladi",
     "nav_language": "Sprache",
     "nav_menu": "Menü",
     "footer_note": "YATB ist ein privates, nicht kommerzielles Projekt und steht in keiner Verbindung zu Discord.",

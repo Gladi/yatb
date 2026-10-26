@@ -8,6 +8,9 @@ legal_date = "2026-10-24"
 # Ko-fi-Seite, z. B. "gladi" für https://ko-fi.com/gladi. Leer = Spenden-Link wird nicht angezeigt.
 kofi = "gladi099"
 
+# Startseite des Betreibers (Link "Weitere Projekte von Gladi" im Fußbereich, gleicher Tab). Leer = kein Link.
+home = ""
+
 # Quellcode (Link "GitHub" im Fußbereich). Leer = kein Link.
 source = "https://github.com/Gladi/yatb"
 

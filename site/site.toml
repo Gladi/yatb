@@ -9,7 +9,7 @@ legal_date = "2026-10-24"
 kofi = "gladi099"
 
 # Startseite des Betreibers (Link "Weitere Projekte von Gladi" im Fußbereich, gleicher Tab). Leer = kein Link.
-home = ""
+home = "https://gladi.de"
 
 # Quellcode (Link "GitHub" im Fußbereich). Leer = kein Link.
 source = "https://github.com/Gladi/yatb"

@@ -6,7 +6,7 @@ base_url = "https://yatb.gladi.de"
 legal_date = "2026-10-24"
 
 # Ko-fi-Seite, z. B. "gladi" für https://ko-fi.com/gladi. Leer = Spenden-Link wird nicht angezeigt.
-kofi = "letsgo2u"
+kofi = "gladi099"
 
 # Quellcode (Link "GitHub" im Fußbereich). Leer = kein Link.
 source = "https://github.com/Gladi/yatb"

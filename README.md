@@ -3,7 +3,7 @@
 YATB links Discord channels in different languages. Everyone writes in their own language; YATB posts the
 translation in the other channels of the bridge under the author's name and avatar.
 
-Website and user guide: **[yatb.gladi.de](https://yatb.gladi.de)** · Support: [Ko-fi](https://ko-fi.com/letsgo2u)
+Website and user guide: **[yatb.gladi.de](https://yatb.gladi.de)** · Support: [Ko-fi](https://ko-fi.com/gladi099)
 
 ## Features
 

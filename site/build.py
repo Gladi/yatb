@@ -16,6 +16,7 @@ import re
 import sys
 import tomllib
 from pathlib import Path
+from urllib.parse import urlparse
 
 SITE = Path(__file__).resolve().parent
 REPO = SITE.parent
@@ -323,6 +324,27 @@ class Page:
 
 
 # ----------------- Ausgabe -----------------
+_A_TAG = re.compile(r"<a\s[^>]*>")
+
+
+def external_new_tab(page: str, base_url: str) -> str:
+    """Links nach außerhalb der eigenen Domain (base_url und ihre Subdomains, z. B. *.gladi.de) öffnen in einem neuen
+    Tab - mit rel="noopener noreferrer". Links, die schon ein target haben, bleiben, wie sie sind."""
+    base = urlparse(base_url).hostname or ""
+    domain = base.split(".", 1)[1] if base.count(".") >= 2 else base
+
+    def fix(match):
+        tag = match.group(0)
+        href = re.search(r'href="(https?://[^"]+)"', tag)
+        if not href or "target=" in tag:
+            return tag
+        host = urlparse(href.group(1)).hostname or ""
+        if host == domain or host.endswith("." + domain):
+            return tag
+        return re.sub(r'\srel="[^"]*"', "", tag)[:-1] + ' target="_blank" rel="noopener noreferrer">'
+    return _A_TAG.sub(fix, page)
+
+
 def render() -> dict:
     """Alle Dateien als {relativer Pfad: bytes} (deterministisch, ohne Zeitstempel)."""
     settings, facts = load_settings(), bot_facts()
@@ -335,8 +357,9 @@ def render() -> dict:
     for lang in LANGS:
         for slug in pages:
             page = Page(lang, slug, settings, facts, assets)
-            files[f"{lang}/{slug}.html"] = getattr(page, slug)().encode("utf-8")
-    files["404.html"] = Page("en", "index", settings, facts, assets).not_found().encode("utf-8")
+            files[f"{lang}/{slug}.html"] = external_new_tab(getattr(page, slug)(), settings["base_url"]).encode("utf-8")
+    files["404.html"] = external_new_tab(Page("en", "index", settings, facts, assets).not_found(),
+                                         settings["base_url"]).encode("utf-8")
     # Rückfall, falls die Weiterleitung nach Browsersprache nicht greift
     links = "".join(f'<li><a href="/{lg}/" hreflang="{lg}" lang="{lg}">{LANG_NAMES[lg]}</a></li>' for lg in LANGS)
     files["index.html"] = (f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" '

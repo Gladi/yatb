@@ -13,6 +13,16 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'admins_col_command': 'Comando',
         'admins_col_desc': 'Descripción',
         'admins_commands_title': 'Todos los comandos',
+        'admins_dashboard': '<p>En el <a href="{url}">panel de control</a> inicias sesión con Discord y ves todos los '
+                            'servidores con YATB en los que eres administrador.</p><ul><li>Uso por clave de API: hoy y '
+                            'este mes, frente a los límites gratuitos o tu presupuesto; se actualiza '
+                            'solo.</li><li>Cambia la etiqueta, el plan, el presupuesto y el límite de una clave, o '
+                            'elimínala. La clave en sí nunca se muestra ni se introduce en la web: añadir una clave '
+                            'sigue siendo un formulario en Discord.</li><li>Cambia el orden de la cadena de '
+                            'traducción.</li><li>Estadísticas de 7, 30 y 90 días: llamadas, éxitos y volumen por '
+                            'servicio.</li><li>Cada cambio se notifica en el canal de registro del servidor con tu '
+                            'nombre.</li></ul>',
+        'admins_dashboard_title': 'Panel de control',
         'admins_forum': '<ul><li>Vincula foros como canales de texto, p. ej. <code>/yatb bridge add forum #forum-en '
                         'English</code>. Un Bridge contiene foros o canales de texto, nunca ambos. Los canales '
                         'multimedia funcionan de la misma manera.</li><li>Una nueva publicación aparece en todos los '
@@ -34,15 +44,15 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'admins_lead': 'YATB es un bot privado. Si está en tu servidor, así es como debes configurarlo. Todos los '
                        'comandos están bajo <code>/yatb</code> y solo son visibles para los administradores.',
         'admins_limits': '<ul><li><strong>Claves gratuitas:</strong> YATB contabiliza el uso según los límites '
-                         'gratuitos del proveedor por minuto, día y mes.</li><li><strong>Claves de pago:</strong> '
+                         'gratuitos del proveedor por minuto, día y mes.</li><li><strong>Claves de pago:</strong> tú '
                          'estableces un presupuesto mensual en USD o EUR. YATB estima el coste a partir de los precios '
-                         'de lista; establece también un límite de gasto en el proveedor.</li><li>Los límites diarios '
-                         'se reinician a las 00:00 UTC, los mensuales el día 1 a las 00:00 UTC.</li><li>Las '
+                         'listados; configura también un límite de gasto en el proveedor.</li><li>Los límites diarios '
+                         'se reinician a las 00:00 UTC, y los mensuales el día 1 a las 00:00 UTC.</li><li>Las '
                          'advertencias al 90, 95 y 100 % se envían al canal de registro. Cuando una clave se agota, el '
-                         'siguiente servicio toma el relevo.</li><li>Si se utiliza la misma clave en varios '
-                         'servidores, el uso se contabiliza conjuntamente. Nunca se mencionan otros '
-                         'servidores.</li><li><code>/yatb keys list</code> muestra el uso por clave, <code>/yatb keys '
-                         'edit</code> cambia el plan, el presupuesto y el límite.</li></ul>',
+                         'siguiente servicio toma el relevo.</li><li>Si la misma clave se usa en varios servidores, el '
+                         'uso se contabiliza en conjunto. Nunca se nombran otros servidores.</li><li><code>/yatb keys '
+                         'list</code> y el panel de control muestran el uso por clave; <code>/yatb keys edit</code> '
+                         'permite cambiar el plan, el presupuesto y el límite.</li></ul>',
         'admins_limits_title': 'Uso, límites y presupuesto',
         'admins_remove': '<code>/yatb reset</code> elimina todos los Bridge, claves y ajustes de tu servidor. '
                          '<code>/yatb uninstall</code> elimina todos los datos de tu servidor y el bot se marcha.',
@@ -149,6 +159,8 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'members_choice_standard': '<strong>Estándar</strong>: mejor calidad. Tus mensajes pueden enviarse a los '
                                    'servicios que hayan añadido los administradores.',
         'members_choice_title': 'Tu elección: <code>/yatb-user privacy</code>',
+        'members_dashboard': 'También puedes consultar y cambiar tu elección en el <a href="{url}">panel de '
+                             'control</a> (inicia sesión con Discord).',
         'members_data': '<ul><li>YATB <strong>no almacena el texto de los mensajes</strong>. Solo recuerda qué mensaje '
                         'pertenece a qué traducción durante {map_days} días, para que las ediciones y eliminaciones '
                         'puedan reflejarse.</li><li>Para traducir, tu mensaje se envía a los servicios de traducción '
@@ -170,6 +182,7 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'members_tags_title': 'La etiqueta después del nombre',
         'members_title': 'Para miembros',
         'nav_admins': 'Para administradores',
+        'nav_dashboard': 'Panel de control',
         'nav_home': 'Inicio',
         'nav_imprint': 'Aviso legal',
         'nav_keys': 'Claves API',
@@ -335,6 +348,16 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'admins_col_command': 'Commande',
         'admins_col_desc': 'Description',
         'admins_commands_title': 'Toutes les commandes',
+        'admins_dashboard': '<p>Dans le <a href="{url}">tableau de bord</a>, connecte-toi avec Discord et vois tous '
+                            'les serveurs avec YATB sur lesquels tu es administrateur·rice.</p><ul><li>Utilisation par '
+                            "clé API : aujourd'hui et ce mois-ci, par rapport aux limites gratuites ou à ton budget — "
+                            "les données se mettent à jour automatiquement.</li><li>Modifie l'étiquette, le plan, le "
+                            "budget et la limite d'une clé, ou supprime une clé. La clé elle-même n'est jamais "
+                            "affichée ni saisie sur le site — l'ajout d'une clé reste un formulaire sur "
+                            "Discord.</li><li>Change l'ordre de la chaîne de traduction.</li><li>Statistiques sur 7, "
+                            '30 et 90 jours : appels, succès et volume par service.</li><li>Toute modification est '
+                            'signalée dans le canal de log du serveur avec ton nom.</li></ul>',
+        'admins_dashboard_title': 'Tableau de bord',
         'admins_forum': '<ul><li>Relie des forums comme des salons textuels, par ex. <code>/yatb bridge add forum '
                         '#forum-en English</code>. Un Bridge contient soit des forums, soit des salons textuels, '
                         'jamais les deux. Les salons médias fonctionnent de la même manière.</li><li>Une nouvelle '
@@ -358,16 +381,17 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'admins_lead': "YATB est un bot privé. S'il est présent sur ton serveur, voici comment le configurer. Toutes "
                        'les commandes se trouvent sous <code>/yatb</code> et ne sont visibles que par les '
                        'administrateurs.',
-        'admins_limits': "<ul><li><strong>Clés gratuites :</strong> YATB comptabilise l'utilisation par rapport aux "
-                         'limites gratuites du fournisseur par minute, jour et mois.</li><li><strong>Clés payantes '
-                         ':</strong> tu définis un budget mensuel en USD ou EUR. YATB estime le coût à partir des prix '
-                         'catalogue - définis également une limite de dépenses chez le fournisseur.</li><li>Les '
-                         'limites quotidiennes sont réinitialisées à 00:00 UTC, les limites mensuelles le 1er à 00:00 '
-                         'UTC.</li><li>Les avertissements à 90, 95 et 100 % sont envoyés dans le canal de '
-                         "journalisation. Lorsqu'une clé est épuisée, le service suivant prend le relais.</li><li>Si "
-                         "la même clé est utilisée sur plusieurs serveurs, l'utilisation est cumulée. Les autres "
-                         "serveurs ne sont jamais nommés.</li><li><code>/yatb keys list</code> affiche l'utilisation "
-                         'par clé, <code>/yatb keys edit</code> modifie le plan, le budget et la limite.</li></ul>',
+        'admins_limits': "<ul><li><strong>Clés gratuites :</strong> YATB compte l'utilisation par rapport aux limites "
+                         'gratuites du fournisseur par minute, jour et mois.</li><li><strong>Clés payantes :</strong> '
+                         'tu définis un budget mensuel en USD ou EUR. YATB estime le coût à partir des tarifs publics '
+                         '— définis aussi une limite de dépenses chez le fournisseur.</li><li>Les limites quotidiennes '
+                         'se réinitialisent à 00:00 UTC, les limites mensuelles le 1er à 00:00 UTC.</li><li>Des '
+                         'avertissements à 90, 95 et 100 % sont envoyés dans le canal de log. Quand une clé est '
+                         'épuisée, le service suivant prend le relais.</li><li>Si la même clé est utilisée sur '
+                         "plusieurs serveurs, l'utilisation est comptabilisée ensemble. Les autres serveurs ne sont "
+                         'jamais nommés.</li><li><code>/yatb keys list</code> et le tableau de bord affichent '
+                         "l'utilisation par clé, <code>/yatb keys edit</code> permet de modifier le plan, le budget et "
+                         'la limite.</li></ul>',
         'admins_limits_title': 'Utilisation, limites et budget',
         'admins_remove': '<code>/yatb reset</code> supprime tous les Bridge, clés et paramètres de ton serveur. '
                          '<code>/yatb uninstall</code> supprime toutes les données de ton serveur et le bot quitte le '
@@ -476,6 +500,8 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'members_choice_standard': '<strong>Standard</strong> - meilleure qualité. Tes messages peuvent être envoyés '
                                    'aux services ajoutés par les administrateurs.',
         'members_choice_title': 'Ton choix : <code>/yatb-user privacy</code>',
+        'members_dashboard': 'Tu peux aussi vérifier et modifier ton choix dans le <a href="{url}">tableau de bord</a> '
+                             '(connecte-toi avec Discord).',
         'members_data': '<ul><li>YATB ne <strong>stocke pas le texte des messages</strong>. Il mémorise uniquement '
                         'quel message correspond à quelle traduction, pendant {map_days} jours, afin que les '
                         'modifications et les suppressions puissent être répercutées.</li><li>Pour traduire, ton '
@@ -497,6 +523,7 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'members_tags_title': "L'étiquette après le nom",
         'members_title': 'Pour les membres',
         'nav_admins': 'Pour les administrateurs',
+        'nav_dashboard': 'Tableau de bord',
         'nav_home': 'Accueil',
         'nav_imprint': 'Mentions légales',
         'nav_keys': 'Clés API',
@@ -665,6 +692,16 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'admins_col_command': 'Comando',
         'admins_col_desc': 'Descrizione',
         'admins_commands_title': 'Tutti i comandi',
+        'admins_dashboard': '<p>Nel <a href="{url}">pannello di controllo</a> accedi con Discord e vedi tutti i server '
+                            'con YATB di cui sei amministratore.</p><ul><li>Utilizzo per chiave API: oggi e questo '
+                            'mese, rispetto ai limiti gratuiti o al tuo budget - si aggiorna '
+                            "automaticamente.</li><li>Modifica l'etichetta, il piano, il budget e il limite di una "
+                            'chiave, oppure rimuovila. La chiave vera e propria non viene mai mostrata o inserita sul '
+                            "sito: aggiungere una chiave resta un modulo su Discord.</li><li>Modifica l'ordine della "
+                            'catena di traduzione.</li><li>Statistiche per 7, 30 e 90 giorni: chiamate, successo e '
+                            'volume per servizio.</li><li>Ogni modifica viene segnalata nel canale log del server con '
+                            'il tuo nome.</li></ul>',
+        'admins_dashboard_title': 'Pannello di controllo',
         'admins_forum': '<ul><li>Collega i forum come i canali testuali, ad esempio <code>/yatb bridge add forum '
                         '#forum-en English</code>. Un Bridge contiene solo forum o solo canali testuali, mai entrambi. '
                         'I canali media funzionano allo stesso modo.</li><li>Un nuovo post appare in ogni altro forum '
@@ -685,16 +722,16 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'admins_forum_title': 'Forum e canali media',
         'admins_lead': 'YATB è un bot privato. Se è presente sul tuo server, ecco come configurarlo. Tutti i comandi '
                        'sono sotto <code>/yatb</code> e visibili solo agli amministratori.',
-        'admins_limits': "<ul><li><strong>Chiavi gratuite:</strong> YATB conteggia l'utilizzo in base ai limiti "
-                         'gratuiti del provider per minuto, giorno e mese.</li><li><strong>Chiavi a '
-                         'pagamento:</strong> imposti un budget mensile in USD o EUR. YATB stima il costo in base ai '
-                         'prezzi di listino - imposta un limite di spesa anche presso il provider.</li><li>I limiti '
-                         'giornalieri si azzerano alle 00:00 UTC, quelli mensili il primo del mese alle 00:00 '
-                         'UTC.</li><li>Gli avvisi al 90, 95 e 100% vengono inviati al canale di log. Quando una chiave '
-                         'è esaurita, subentra il servizio successivo.</li><li>Se la stessa chiave viene utilizzata su '
-                         "più server, l'utilizzo viene conteggiato cumulativamente. Gli altri server non vengono mai "
-                         "menzionati.</li><li><code>/yatb keys list</code> mostra l'utilizzo per chiave, <code>/yatb "
-                         'keys edit</code> modifica piano, budget e limite.</li></ul>',
+        'admins_limits': "<ul><li><strong>Chiavi gratuite:</strong> YATB conteggia l'utilizzo rispetto ai limiti "
+                         'gratuiti del provider al minuto, al giorno e al mese.</li><li><strong>Chiavi a '
+                         'pagamento:</strong> imposti un budget mensile in USD o EUR. YATB stima il costo in base alle '
+                         'tariffe pubblicate: imposta anche un limite di spesa sul provider.</li><li>I limiti '
+                         'giornalieri si resettano alle 00:00 UTC, quelli mensili il 1° del mese alle 00:00 '
+                         'UTC.</li><li>Avvisi al 90, 95 e 100% vengono inviati al canale log. Quando una chiave è '
+                         'esaurita, subentra il servizio successivo.</li><li>Se la stessa chiave viene usata su più '
+                         "server, l'utilizzo viene conteggiato insieme. Gli altri server non vengono mai "
+                         "menzionati.</li><li><code>/yatb keys list</code> e il pannello mostrano l'utilizzo per "
+                         'chiave, <code>/yatb keys edit</code> modifica piano, budget e limite.</li></ul>',
         'admins_limits_title': 'Utilizzo, limiti e budget',
         'admins_remove': '<code>/yatb reset</code> elimina tutti i Bridge, le chiavi e le impostazioni del tuo server. '
                          '<code>/yatb uninstall</code> elimina tutti i dati del tuo server e il bot esce.',
@@ -800,6 +837,8 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'members_choice_standard': '<strong>Standard</strong> - qualità migliore. I tuoi messaggi potrebbero essere '
                                    'inviati ai servizi aggiunti dagli amministratori.',
         'members_choice_title': 'La tua scelta: <code>/yatb-user privacy</code>',
+        'members_dashboard': 'Puoi anche controllare e modificare la tua scelta nel <a href="{url}">pannello di '
+                             'controllo</a> (accedi con Discord).',
         'members_data': '<ul><li>YATB <strong>non memorizza i testi dei messaggi</strong>. Ricorda solo quale '
                         'messaggio appartiene a quale traduzione, per {map_days} giorni, in modo che le modifiche e le '
                         'eliminazioni possano essere sincronizzate.</li><li>Per tradurre, il tuo messaggio viene '
@@ -821,6 +860,7 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'members_tags_title': 'Il tag dopo il nome',
         'members_title': 'Per i membri',
         'nav_admins': 'Per gli amministratori',
+        'nav_dashboard': 'Pannello di controllo',
         'nav_home': 'Home',
         'nav_imprint': 'Note legali',
         'nav_keys': 'Chiavi API',
@@ -990,6 +1030,16 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'admins_col_command': 'Commando',
         'admins_col_desc': 'Beschrijving',
         'admins_commands_title': "Alle commando's",
+        'admins_dashboard': '<p>In de <a href="{url}">dashboard</a> log je in met Discord en zie je elke server met '
+                            'YATB waarop je beheerder bent.</p><ul><li>Gebruik per API-sleutel: vandaag en deze maand, '
+                            'tegen de gratis limieten of je budget – het wordt automatisch bijgewerkt.</li><li>Wijzig '
+                            'de label, het plan, budget en limiet van een sleutel, of verwijder een sleutel. De '
+                            'sleutel zelf wordt nooit getoond of ingevoerd op de website – een sleutel toevoegen '
+                            'blijft een formulier in Discord.</li><li>Wijzig de volgorde van de '
+                            'vertaalketen.</li><li>Statistieken voor 7, 30 en 90 dagen: oproepen, succes en volume per '
+                            'dienst.</li><li>Elke wijziging wordt gemeld in het logkanaal van de server met je '
+                            'naam.</li></ul>',
+        'admins_dashboard_title': 'Dashboard',
         'admins_forum': '<ul><li>Koppel forums zoals tekstkanalen, bijv. <code>/yatb bridge add forum #forum-en '
                         'English</code>. Een Bridge bevat ofwel forums ofwel tekstkanalen, nooit beide. Mediakanalen '
                         'werken op dezelfde manier.</li><li>Een nieuw bericht verschijnt in elk ander forum van de '
@@ -1010,16 +1060,16 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'admins_forum_title': 'Forum- en mediakanalen',
         'admins_lead': 'YATB is een privébot. Als deze op je server staat, kun je hem als volgt instellen. Alle '
                        "commando's staan onder <code>/yatb</code> en zijn alleen zichtbaar voor beheerders.",
-        'admins_limits': '<ul><li><strong>Gratis sleutels:</strong> YATB telt het gebruik mee voor de gratis limieten '
+        'admins_limits': '<ul><li><strong>Gratis sleutels:</strong> YATB telt het gebruik mee tegen de gratis limieten '
                          'van de provider per minuut, dag en maand.</li><li><strong>Betaalde sleutels:</strong> je '
-                         'stelt een maandelijks budget in USD of EUR in. YATB schat de kosten op basis van de '
-                         'catalogusprijzen - stel ook een bestedingslimiet in bij de provider zelf.</li><li>Dagelijkse '
-                         'limieten worden gereset om 00:00 UTC, maandelijkse limieten op de 1e om 00:00 '
-                         'UTC.</li><li>Waarschuwingen bij 90, 95 en 100% gaan naar het logkanaal. Wanneer een sleutel '
-                         'is verbruikt, neemt de volgende dienst het over.</li><li>Als dezelfde sleutel op meerdere '
-                         'servers wordt gebruikt, wordt het gebruik bij elkaar opgeteld. Andere servers worden nooit '
-                         'genoemd.</li><li><code>/yatb keys list</code> toont het gebruik per sleutel, <code>/yatb '
-                         'keys edit</code> wijzigt het plan, budget en de limiet.</li></ul>',
+                         'stelt een maandbudget in in USD of EUR. YATB schat de kosten in op basis van de lijstprijzen '
+                         '– stel ook een uitgavenlimiet in bij de provider.</li><li>Dagelijkse limieten resetten om '
+                         '00:00 UTC, maandelijkse limieten op de 1e om 00:00 UTC.</li><li>Waarschuwingen bij 90, 95 en '
+                         '100 % gaan naar het logkanaal. Als een sleutel op is, neemt de volgende dienst het '
+                         'over.</li><li>Als dezelfde sleutel op meerdere servers wordt gebruikt, wordt het gebruik '
+                         'samengeteld. Andere servers worden nooit genoemd.</li><li><code>/yatb keys list</code> en de '
+                         'dashboard tonen het gebruik per sleutel, <code>/yatb keys edit</code> wijzigt plan, budget '
+                         'en limiet.</li></ul>',
         'admins_limits_title': 'Gebruik, limieten en budget',
         'admins_remove': '<code>/yatb reset</code> verwijdert alle Bridges, sleutels en instellingen van je server. '
                          '<code>/yatb uninstall</code> verwijdert alle gegevens van je server en de bot verlaat de '
@@ -1123,6 +1173,8 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'members_choice_standard': '<strong>Standaard</strong> - beste kwaliteit. Je berichten kunnen worden verzonden '
                                    'naar de services die de beheerders hebben toegevoegd.',
         'members_choice_title': 'Jouw keuze: <code>/yatb-user privacy</code>',
+        'members_dashboard': 'Je kunt je keuze ook bekijken en aanpassen in de <a href="{url}">dashboard</a> (log in '
+                             'met Discord).',
         'members_data': '<ul><li>YATB <strong>slaat geen berichtteksten op</strong>. Het onthoudt alleen welk bericht '
                         'bij welke vertaling hoort, gedurende {map_days} dagen, zodat bewerkingen en verwijderingen '
                         'kunnen worden gespiegeld.</li><li>Om te vertalen wordt je bericht verzonden naar de '
@@ -1144,6 +1196,7 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'members_tags_title': 'De tag achter de naam',
         'members_title': 'Voor leden',
         'nav_admins': 'Voor beheerders',
+        'nav_dashboard': 'Dashboard',
         'nav_home': 'Home',
         'nav_imprint': 'Colofon',
         'nav_keys': 'API-sleutels',
@@ -1310,6 +1363,15 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'admins_col_command': 'Команда',
         'admins_col_desc': 'Описание',
         'admins_commands_title': 'Все команды',
+        'admins_dashboard': '<p>В <a href="{url}">панели управления</a> ты входишь через Discord и видишь все серверы '
+                            'с YATB, где ты администратор.</p><ul><li>Использование по API-ключу: сегодня и за этот '
+                            'месяц, в сравнении с бесплатными лимитами или твоим бюджетом — данные обновляются '
+                            'автоматически.</li><li>Меняй метку, план, бюджет и лимит ключа или удаляй его. Сам ключ '
+                            'никогда не показывается и не вводится на сайте — добавление ключа остаётся формой в '
+                            'Discord.</li><li>Меняй порядок цепочки переводчиков.</li><li>Статистика за 7, 30 и 90 '
+                            'дней: вызовы, успешность и объём по каждой службе.</li><li>Все изменения отображаются в '
+                            'канале лога сервера с твоим именем.</li></ul>',
+        'admins_dashboard_title': 'Панель управления',
         'admins_forum': '<ul><li>Связывай форумы как текстовые каналы, например, <code>/yatb bridge add forum '
                         '#forum-en English</code>. Bridge содержит либо форумы, либо текстовые каналы, но никогда не и '
                         'то, и другое вместе. Медиаканалы работают аналогично.</li><li>Новая публикация появляется во '
@@ -1330,16 +1392,16 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'admins_forum_title': 'Форумы и медиаканалы',
         'admins_lead': 'YATB — это приватный бот. Если он есть на твоем сервере, вот как его настроить. Все команды '
                        'находятся в <code>/yatb</code> и видны только администраторам.',
-        'admins_limits': '<ul><li><strong>Бесплатные ключи:</strong> YATB учитывает использование в рамках бесплатных '
-                         'лимитов провайдера в минуту, день и месяц.</li><li><strong>Платные ключи:</strong> ты '
-                         'устанавливаешь ежемесячный бюджет в USD или EUR. YATB оценивает стоимость по прейскуранту — '
-                         'также установи лимит расходов у самого провайдера.</li><li>Дневные лимиты сбрасываются в '
-                         '00:00 UTC, месячные — 1-го числа в 00:00 UTC.</li><li>Предупреждения при достижении 90, 95 и '
-                         '100% отправляются в канал логов. Когда ключ исчерпан, управление переходит к следующему '
-                         'сервису.</li><li>Если один и тот же ключ используется на нескольких серверах, использование '
-                         'суммируется. Другие серверы никогда не называются.</li><li><code>/yatb keys list</code> '
-                         'показывает использование по ключу, <code>/yatb keys edit</code> меняет план, бюджет и '
-                         'лимит.</li></ul>',
+        'admins_limits': '<ul><li><strong>Бесплатные ключи:</strong> YATB учитывает использование в пределах '
+                         'бесплатных лимитов провайдера в минуту, день и месяц.</li><li><strong>Платные '
+                         'ключи:</strong> ты устанавливаешь ежемесячный бюджет в долларах США или евро. YATB оценивает '
+                         'стоимость по прайс-листам — также задай лимит расходов у провайдера.</li><li>Ежедневные '
+                         'лимиты сбрасываются в 00:00 UTC, ежемесячные — 1-го числа в 00:00 '
+                         'UTC.</li><li>Предупреждения на 90, 95 и 100 % отправляются в канал лога. Когда ключ '
+                         'заканчивается, подключается следующая служба.</li><li>Если один и тот же ключ используется '
+                         'на нескольких серверах, использование суммируется. Другие серверы никогда не '
+                         'упоминаются.</li><li><code>/yatb keys list</code> и панель управления показывают '
+                         'использование по ключу, <code>/yatb keys edit</code> меняет план, бюджет и лимит.</li></ul>',
         'admins_limits_title': 'Использование, лимиты и бюджет',
         'admins_remove': '<code>/yatb reset</code> удаляет все Bridge, ключи и настройки твоего сервера. <code>/yatb '
                          'uninstall</code> удаляет все данные твоего сервера, и бот покидает его.',
@@ -1441,6 +1503,8 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'members_choice_standard': '<strong>Стандартный</strong> — лучшее качество. Твои сообщения могут отправляться '
                                    'в сервисы, добавленные администраторами.',
         'members_choice_title': 'Твой выбор: <code>/yatb-user privacy</code>',
+        'members_dashboard': 'Ты можешь проверить и изменить свой выбор в <a href="{url}">панели управления</a> (войди '
+                             'через Discord).',
         'members_data': '<ul><li>YATB <strong>не хранит тексты сообщений</strong>. Бот лишь запоминает, какое '
                         'сообщение к какому переводу относится, в течение {map_days} дней, чтобы изменения и удаления '
                         'могли синхронизироваться.</li><li>Для перевода твое сообщение отправляется в сервисы '
@@ -1462,6 +1526,7 @@ TEXTS_MT = {'es': {'admins_chain_intro': 'Para cada mensaje, YATB prueba los ser
         'members_tags_title': 'Тег после имени',
         'members_title': 'Для участников',
         'nav_admins': 'Для администраторов',
+        'nav_dashboard': 'Панель управления',
         'nav_home': 'Главная',
         'nav_imprint': 'Выходные данные',
         'nav_keys': 'API-ключи',
@@ -1623,11 +1688,13 @@ SOURCE_HASH = {'admins_chain_intro': '1a810dee3646',
  'admins_col_command': '713166971d73',
  'admins_col_desc': '526e0087cc3f',
  'admins_commands_title': 'f9c42878c290',
+ 'admins_dashboard': 'd7552aac9d0d',
+ 'admins_dashboard_title': '67b696468610',
  'admins_forum': 'd133d4864c9f',
  'admins_forum_perms': '51aee937438f',
  'admins_forum_title': '5346d54cffa5',
  'admins_lead': '91fec99fba5a',
- 'admins_limits': '198d568e9720',
+ 'admins_limits': '59ce5ffcd687',
  'admins_limits_title': '0dd60ead156b',
  'admins_remove': '415cb4b789f2',
  'admins_remove_title': '9d8c3e2dc03b',
@@ -1698,6 +1765,7 @@ SOURCE_HASH = {'admins_chain_intro': '1a810dee3646',
  'members_choice_note': 'cdb38c3a1b72',
  'members_choice_standard': '6e6e1dfa359c',
  'members_choice_title': '92475389ace1',
+ 'members_dashboard': '507eeb8a93d2',
  'members_data': '52d6baea5928',
  'members_data_title': 'ee5ef73aae18',
  'members_faq_title': '9a72221a2747',
@@ -1708,6 +1776,7 @@ SOURCE_HASH = {'admins_chain_intro': '1a810dee3646',
  'members_tags_title': '2898e0376359',
  'members_title': '892ae6013aa9',
  'nav_admins': '38e68419607c',
+ 'nav_dashboard': '67b696468610',
  'nav_home': '3a78695388b3',
  'nav_imprint': 'd198ed30d09b',
  'nav_keys': '98aae8972102',

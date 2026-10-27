@@ -127,6 +127,10 @@ class Page:
         lang = lang or self.lang
         return f"/{lang}/" if slug == "index" else f"/{lang}/{slug}"
 
+    def dashboard(self) -> str:
+        """Dashboard (yatb-web) unter /app/ - in der Sprache der Seite."""
+        return f"/app/?lang={self.lang}"
+
     def shell(self, title: str, body: str) -> str:
         t, base = self.t, self.s["base_url"]
         full_title = f"YATB - {title}" if self.slug == "index" else f"{title} · YATB"
@@ -135,6 +139,7 @@ class Page:
         alternates += f'<link rel="alternate" hreflang="x-default" href="{base}{self.url(self.slug, "en")}">'
         nav = "".join(f'<li><a href="{self.url(p)}"{CURRENT_PAGE if p == self.slug else ""}>{t("nav_" + p)}</a></li>'
                       for p in ("members", "admins", "keys"))
+        nav += f'<li><a href="{self.dashboard()}">{t("nav_dashboard")}</a></li>'      # Anmeldung, eigener Dienst
         langs = "".join(f'<li><a href="{self.url(self.slug, lg)}" hreflang="{lg}" lang="{lg}"'
                         f'{CURRENT_LANG if lg == self.lang else ""}>{LANG_NAMES[lg]}</a></li>'
                         for lg in LANGS)
@@ -232,7 +237,7 @@ class Page:
 <section><h2>{t("members_how_title")}</h2>{t("members_how")}</section>
 <section><h2>{t("members_tags_title")}</h2><p>{t("members_tags_intro")}</p><table class="tags"><tbody>{tags}</tbody></table></section>
 <section><h2>{t("members_data_title")}</h2>{t("members_data")}</section>
-<section class="note"><h2>{t("members_choice_title")}</h2><ul><li>{t("members_choice_standard")}</li><li>{t("members_choice_local")}</li></ul><p>{t("members_choice_note")}</p></section>
+<section class="note"><h2>{t("members_choice_title")}</h2><ul><li>{t("members_choice_standard")}</li><li>{t("members_choice_local")}</li></ul><p>{t("members_choice_note")}</p><p>{t("members_dashboard", url=self.dashboard())}</p></section>
 <section><h2>{t("members_faq_title")}</h2>{faq}</section>""")
 
     def admins(self) -> str:
@@ -251,6 +256,7 @@ class Page:
 <section><h2>{t("admins_chain_title")}</h2><p>{t("admins_chain_intro")}</p>
 <ol class="chain">{"".join(f"<li>{t(f'chain_{i}')}</li>" for i in range(1, 6))}</ol><p>{t("admins_chain_note")}</p></section>
 <section><h2>{t("admins_limits_title")}</h2>{t("admins_limits")}</section>
+<section><h2>{t("admins_dashboard_title")}</h2>{t("admins_dashboard", url=self.dashboard())}</section>
 <section><h2>{t("admins_forum_title")}</h2>{t("admins_forum")}{t("admins_forum_perms")}</section>
 <section class="note"><h2>{t("admins_security_title")}</h2><p>{t("admins_security")}</p></section>
 <section><h2>{t("admins_commands_title")}</h2><div class="table-wrap"><table><thead><tr><th>{t("admins_col_command")}</th><th>{t("admins_col_desc")}</th></tr></thead><tbody>{rows}</tbody></table></div></section>

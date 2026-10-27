@@ -88,6 +88,9 @@ class SiteTests(unittest.TestCase):
             for href in HREF_RE.findall(text):
                 if href.startswith(("http://", "https://", "#")):
                     continue
+                if href.startswith("/app/"):            # Dashboard: eigener Dienst (yatb-web), nicht die statische Seite
+                    self.assertRegex(href, r"^/app/\?lang=[a-z]{2}$")
+                    continue
                 path = href.split("#")[0].split("?")[0]
                 if not path.startswith("/"):
                     path = f"/{base}/{path}" if base else f"/{path}"
